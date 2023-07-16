@@ -1,0 +1,37 @@
+[
+  {
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "genre": "Fiction",
+    "publicationDate": "1925",
+    "image": "GOT.jpg"
+  },
+  {
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "genre": "Fiction",
+    "publicationDate": "1960",
+    "image": "a hero born.jpg"
+  },
+  {
+    "title": "1984",
+    "author": "George Orwell",
+    "genre": "Fiction",
+    "publicationDate": "1949",
+    "image": "LOTR3.jpg"
+  },
+  {
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "genre": "Romance",
+    "publicationDate": "1813",
+    "image": "LOTR2.jpg"
+  },
+  {
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "genre": "Fiction",
+    "publicationDate": "1951",
+    "image": "LOTR1.jpg"
+  }
+]
