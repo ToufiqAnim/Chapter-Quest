@@ -2,15 +2,19 @@ import React from "react";
 import Navbar from "./Navbar";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const MainLayout = () => {
   return (
-    <div className="flex p-0 m-0">
-      <Navbar />
-      <div className="pt-8 px-8">
-        <Header />
-        <Outlet />
+    <div className="bg-[#f0eee2] ">
+      <div className=" p-0 m-0">
+        <Navbar />
+        <div className="pt-8 px-8 w-full">
+          <Header />
+          <Outlet />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

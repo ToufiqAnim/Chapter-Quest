@@ -3,115 +3,94 @@ import {
   BsArrowLeftCircle,
   BsFillJournalBookmarkFill,
 } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
+import { VscAccount } from "react-icons/vsc";
 import { MdOutlineAccountCircle } from "react-icons/md";
-import { useState } from "react";
+
 import { AiOutlineBook, AiOutlineHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
-
   return (
-    <div>
-      <div
-        className={` ${
-          open ? "w-60" : " m-6 w-24 border-r-2 border-[#d8d5cc]"
-        } bg-[#f0eee2] border-r-2 border-[#d8d5cc] h-screen p-5  pt-8 relative duration-300`}
-      >
-        <div>
-          <BsBook
-            className={`cursor-pointer w-10 h-10 duration-500 text-[#a59d85]  ${
-              open && "rotate-[360deg] mx-auto"
-            }  ${!open && " mt-16"} `}
+    <nav className=" top-0 shadow-md px-8 py-8 flex justify-evenly font-lobstar">
+      <div className=" flex items-center gap-2">
+        <BsBook className="cursor-pointer w-12 h-12  " />
+        <h1 className="font-medium text-3xl ">Chapter Quest</h1>
+      </div>
+      <div className=" flex   items-center ">
+        <ul className=" flex items-center gap-6 ">
+          <Link to="/">
+            <li
+              className={
+                " rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center "
+              }
+            >
+              <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center ">
+                <AiOutlineHome className={"w-6 h-6  "} />
+                <p>Home</p>
+              </div>
+            </li>
+          </Link>
+
+          <Link to="/books">
+            <li
+              className={
+                "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   "
+              }
+            >
+              <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                <AiOutlineBook className={"w-6 h-6"} />
+                <p>Books</p>
+              </div>
+            </li>
+          </Link>
+
+          <Link to="/wishlist">
+            <li
+              className={
+                "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center  "
+              }
+            >
+              <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                <BsFillJournalBookmarkFill className={"w-6 h-6"} />
+                <p>Whishlist</p>
+              </div>
+            </li>
+          </Link>
+          <Link to="/account">
+            <li
+              className={
+                "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center "
+              }
+            >
+              <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                <MdOutlineAccountCircle className={"w-6 h-6"} />
+                <p>Account</p>
+              </div>
+            </li>
+          </Link>
+        </ul>
+      </div>
+      <div className="flex gap-2">
+        {/* search bar */}
+
+        <div className=" flex items-center h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
+          <div className="grid place-items-center h-full w-12 text-black">
+            <BsSearch />
+          </div>
+
+          <input
+            className="outline-none text-sm text-gray-700 pr-2"
+            type="text"
+            id="search"
+            placeholder="Search book title, author, genre..."
           />
         </div>
-        <div>
-          <BsArrowLeftCircle
-            className={`absolute cursor-pointer -right-3 top-9 w-7 h-7 bg-white border-2 rounded-full text-[#a59d85] ${
-              !open && "rotate-180"
-            }`}
-            onClick={() => setOpen(!open)}
-          />
-          <h1
-            className={` font-medium text-xl duration-500 text-center ${
-              !open && "scale-0"
-            }`}
-          >
-            Chapter Quest
-          </h1>
-        </div>
-        <div className="flex">
-          <ul className="pt-6 my-20">
-            <Link to="/">
-              <li
-                className={
-                  "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center gap-x-4 pb-10"
-                }
-              >
-                <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white ">
-                  <AiOutlineHome className={"w-8 h-8  "} />
-                </div>
-
-                <span
-                  className={`${!open && "hidden"} origin-left duration-200 `}
-                >
-                  Home
-                </span>
-              </li>
-            </Link>
-
-            <Link to="/books">
-              <li
-                className={
-                  "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center gap-x-4 pb-10"
-                }
-              >
-                <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white">
-                  <AiOutlineBook className={"w-8 h-8"} />
-                </div>
-                <span
-                  className={`${!open && "hidden"} origin-left duration-200`}
-                >
-                  Books
-                </span>
-              </li>
-            </Link>
-
-            <Link to="/wishlist">
-              <li
-                className={
-                  "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center gap-x-4 pb-10"
-                }
-              >
-                <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white ">
-                  <BsFillJournalBookmarkFill className={"w-8 h-8"} />
-                </div>
-                <span
-                  className={`${!open && "hidden"} origin-left duration-200`}
-                >
-                  Whishlist
-                </span>
-              </li>
-            </Link>
-            <Link to="/account">
-              <li
-                className={
-                  "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center gap-x-4 pb-10"
-                }
-              >
-                <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white">
-                  <MdOutlineAccountCircle className={"w-8 h-8"} />
-                </div>
-                <span
-                  className={`${!open && "hidden"} origin-left duration-200`}
-                >
-                  Account
-                </span>
-              </li>
-            </Link>
-          </ul>
+        <div className="flex items-center gap-2">
+          <VscAccount className="w-6 h-6" />
+          <p className="font-medium">John Doe</p>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 export default Navbar;

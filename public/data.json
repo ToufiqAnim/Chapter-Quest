@@ -1,37 +1,122 @@
 [
   {
+    "id": 1,
     "title": "The Great Gatsby",
     "author": "F. Scott Fitzgerald",
     "genre": "Fiction",
     "publicationDate": "1925",
-    "image": "GOT.jpg"
+    "image": "../src/assets/GOT.jpg"
   },
   {
+    "id": 2,
     "title": "To Kill a Mockingbird",
     "author": "Harper Lee",
     "genre": "Fiction",
     "publicationDate": "1960",
-    "image": "a hero born.jpg"
+    "image": "../src/assets/book of art.jpg"
   },
   {
-    "title": "1984",
+    "id": 3,
+    "title": "A Hero Born",
     "author": "George Orwell",
     "genre": "Fiction",
     "publicationDate": "1949",
-    "image": "LOTR3.jpg"
+    "image": "../src/assets/a hero born.jpg"
   },
   {
+    "id": 4,
     "title": "Pride and Prejudice",
     "author": "Jane Austen",
     "genre": "Romance",
     "publicationDate": "1813",
-    "image": "LOTR2.jpg"
+    "image": "../src/assets/harry potter 2.jpg"
   },
   {
+    "id": 5,
     "title": "The Catcher in the Rye",
     "author": "J.D. Salinger",
     "genre": "Fiction",
     "publicationDate": "1951",
-    "image": "LOTR1.jpg"
+    "image": "../src/assets/harry Potter 3.jpg"
+  },
+  {
+    "id": 6,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "genre": "Fiction",
+    "publicationDate": "1925",
+    "image": "../src/assets/GOT.jpg"
+  },
+  {
+    "id": 7,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "genre": "Fiction",
+    "publicationDate": "1960",
+    "image": "../src/assets/book of art.jpg"
+  },
+  {
+    "id": 8,
+    "title": "A Hero Born",
+    "author": "George Orwell",
+    "genre": "Fiction",
+    "publicationDate": "1949",
+    "image": "../src/assets/a hero born.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "genre": "Romance",
+    "publicationDate": "1813",
+    "image": "../src/assets/harry potter 2.jpg"
+  },
+  {
+    "id": 10,
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "genre": "Fiction",
+    "publicationDate": "1951",
+    "image": "../src/assets/harry Potter 3.jpg"
+  },
+  {
+    "id": 11,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "genre": "Fiction",
+    "publicationDate": "1925",
+    "image": "../src/assets/GOT.jpg"
+  },
+  {
+    "id": 12,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "genre": "Fiction",
+    "publicationDate": "1960",
+    "image": "../src/assets/book of art.jpg"
+  },
+  {
+    "id": 13,
+    "title": "A Hero Born",
+    "author": "George Orwell",
+    "genre": "Fiction",
+    "publicationDate": "1949",
+    "image": "../src/assets/a hero born.jpg"
+  },
+  {
+    "id": 14,
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "genre": "Romance",
+    "publicationDate": "1813",
+    "image": "../src/assets/harry potter 2.jpg"
+  },
+  {
+    "id": 15,
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "genre": "Fiction",
+    "publicationDate": "1951",
+    "image": "../src/assets/harry Potter 3.jpg"
   }
 ]
