@@ -6,7 +6,7 @@ import Footer from "./Footer";
 
 const MainLayout = () => {
   return (
-    <div className="bg-[#f0eee2] ">
+    <div className="bg-[#e6e3d6] ">
       <div className=" p-0 m-0">
         <Navbar />
         <div className="pt-8 px-8 w-full">

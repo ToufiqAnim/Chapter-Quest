@@ -3,13 +3,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /** @type {import('tailwindcss').Config} */
 
-const withMT = require("@material-tailwind/react/utils/withMT");
-module.exports = withMT({
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "path-to-your-node_modules/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}",
-    "path-to-your-node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}",
-  ],
+export default {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
 
   theme: {
     extend: {
@@ -19,4 +14,4 @@ module.exports = withMT({
     },
   },
   plugins: [],
-});
+};

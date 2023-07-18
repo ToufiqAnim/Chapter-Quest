@@ -1,5 +1,5 @@
 import React from "react";
-import { IBooks } from "../types/tpyes";
+import { IBooks } from "../types/interface";
 import { Link, useLocation } from "react-router-dom";
 
 interface IProps {
@@ -7,11 +7,11 @@ interface IProps {
 }
 
 export function BookCard({ book }: IProps) {
-  const { id, image, title, author, publicationDate, genre } = book;
+  const { _id, image, title, author, publicationDate, genre } = book;
   const { pathname } = useLocation();
   return (
     <div>
-      <Link to={`/books-details/${id}`}>
+      <Link to={`/books-details/${_id}`}>
         <div className=" shadow-xl shadow-gray-400 w-full lg:max-w-full lg:flex items-center">
           <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover text-center overflow-hidden ">
             <img src={image} alt="" className="h-72 p-4" />

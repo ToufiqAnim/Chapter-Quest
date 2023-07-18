@@ -1,8 +1,8 @@
 export interface IBooks {
-  id: number;
+  _id: string;
   title: string;
-  image: string;
-  author: number;
+  author: string;
   genre: string;
+  image: string;
   publicationDate: string;
 }
