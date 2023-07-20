@@ -8,8 +8,20 @@ import { VscAccount } from "react-icons/vsc";
 import { MdOutlineAccountCircle } from "react-icons/md";
 
 import { AiOutlineBook, AiOutlineHome } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "@/lb/firebase";
+import { setUser } from "@/redux/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 const Navbar = () => {
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const { user } = useAppSelector((state) => state.user);
+  const handleLogOut = () => {
+    signOut(auth);
+    dispatch(setUser(null));
+    window.location.reload();
+  };
   return (
     <nav className=" top-0 shadow-md px-8 py-8 flex justify-evenly font-lobstar">
       <div className=" flex items-center gap-2">
@@ -70,11 +82,11 @@ const Navbar = () => {
           </Link>
         </ul>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-3 items-center">
         {/* search bar */}
 
         <div className=" flex items-center h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
-          <div className="grid place-items-center h-full w-12 text-black">
+          <div className="grid place-items-center h-full w-16 text-black">
             <BsSearch />
           </div>
 
@@ -85,10 +97,24 @@ const Navbar = () => {
             placeholder="Search book title, author, genre..."
           />
         </div>
-        <div className="flex items-center gap-2">
-          <VscAccount className="w-6 h-6" />
-          <p className="font-medium">John Doe</p>
-        </div>
+
+        {user?.email ? (
+          <div className="flex items-center gap-2">
+            <VscAccount className="w-6 h-6" />
+            <button
+              onClick={handleLogOut}
+              className="font-medium border-1 border-gray-500 text-xl"
+            >
+              Log Out
+            </button>
+          </div>
+        ) : (
+          <Link to="/signin">
+            <div className="flex items-center gap-2">
+              <p className="font-medium text-xl">Sign In</p>
+            </div>
+          </Link>
+        )}
       </div>
     </nav>
   );

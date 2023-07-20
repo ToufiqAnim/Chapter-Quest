@@ -3,9 +3,8 @@ import { api } from "./api/apiSlice";
 
 export const store = configureStore({
   reducer: {
-    /*  user: userReducer,
-      wishlist: wishlistReducer,
-      search: searchReducer, */
+    auth: authReducer,
+
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

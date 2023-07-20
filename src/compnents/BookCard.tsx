@@ -1,6 +1,18 @@
 import React from "react";
 import { IBooks } from "../types/interface";
 import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  useAddToWishlistMutation,
+  useGetWishlistsQuery,
+  useRemoveFromWishlistsMutation,
+} from "@/redux/features/whishlist/wishlistApi";
+import { useAppSelector } from "@/redux/hooks";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "@/redux/features/whishlist/wishlistSlice";
+import { AiFillHeart, AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 interface IProps {
   book: IBooks;
@@ -9,51 +21,83 @@ interface IProps {
 export function BookCard({ book }: IProps) {
   const { _id, image, title, author, publicationDate, genre } = book;
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const { user } = useAppSelector((state) => state.user);
+  const { data: wishlists } = useGetWishlistsQuery(user.email!);
+  const [addToWishlistApi] = useAddToWishlistMutation();
+  const [removeFromWishlistApi] = useRemoveFromWishlistsMutation();
+
+  const handleWishlist = () => {
+    const payload = { userEmail: user.email, book: book };
+    dispatch(addToWishlist(book));
+    addToWishlistApi(payload);
+    // toast.success(`Successfully, ${book.title} added to wishlist`);
+  };
+  const handleRemoveWishlist = () => {
+    const payload = { email: user?.email, bookId: book?._id };
+    dispatch(removeFromWishlist(book));
+    removeFromWishlistApi(payload);
+    // toast.success(`Successfully, ${book.title} removed from wishlist`);
+  };
+
+  const wishlistedBook = wishlists?.books?.find(
+    (wishlist: IBooks) => wishlist?._id === book?._id
+  );
+  const userVerified = user?.email && book?.addedBook === user?.email;
   return (
     <div>
-      <Link to={`/books-details/${_id}`}>
-        <div className=" shadow-xl shadow-gray-400 w-full lg:max-w-full lg:flex items-center">
-          <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover text-center overflow-hidden ">
+      <div className=" shadow-xl shadow-gray-400 w-full lg:max-w-full lg:flex items-center">
+        <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover text-center overflow-hidden ">
+          <Link to={`/books-details/${_id}`}>
             <img src={image} alt="" className="h-72 p-4" />
+          </Link>
+        </div>
+        <div className=" p-4 flex flex-col justify-between leading-normal">
+          <div className="mb-8">
+            <p className="text-sm text-gray-600 flex items-center font-lobstar">
+              <svg
+                className="fill-current text-gray-500 w-3 h-3 mr-2"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
+              </svg>
+              Members only
+            </p>
+            <div className="text-gray-900 font-bold text-xl mb-2 font-lobstar">
+              {title}
+            </div>
+            <p className="text-gray-500 text-base font-lobstar">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatibus quia, Nonea! Maiores et perferendis eaque,
+              exercitationem praesentium nihil.
+            </p>
           </div>
-          <div className=" p-4 flex flex-col justify-between leading-normal">
-            <div className="mb-8">
-              <p className="text-sm text-gray-600 flex items-center font-lobstar">
-                <svg
-                  className="fill-current text-gray-500 w-3 h-3 mr-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-                </svg>
-                Members only
+          <div className="flex items-center">
+            <img
+              className="w-10 h-10 rounded-full mr-4"
+              src={image}
+              alt="Avatar of Writer"
+            />
+            <div className="text-sm">
+              <p className="text-gray-900 leading-none font-lobstar">
+                {author}
               </p>
-              <div className="text-gray-900 font-bold text-xl mb-2 font-lobstar">
-                {title}
-              </div>
-              <p className="text-gray-500 text-base font-lobstar">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptatibus quia, Nonea! Maiores et perferendis eaque,
-                exercitationem praesentium nihil.
-              </p>
+              <p className="text-gray-600 font-lobstar">{genre}</p>
+              <p className="text-gray-600 font-lobstar">{publicationDate}</p>
             </div>
-            <div className="flex items-center">
-              <img
-                className="w-10 h-10 rounded-full mr-4"
-                src={image}
-                alt="Avatar of Writer"
-              />
-              <div className="text-sm">
-                <p className="text-gray-900 leading-none font-lobstar">
-                  {author}
-                </p>
-                <p className="text-gray-600 font-lobstar">{genre}</p>
-                <p className="text-gray-600 font-lobstar">{publicationDate}</p>
-              </div>
-            </div>
+            {userVerified && (
+              <button className="btn btn-circle text-error text-2xl">
+                {wishlistedBook ? (
+                  <AiFillStar onClick={handleRemoveWishlist} />
+                ) : (
+                  <AiOutlineStar onClick={handleWishlist} />
+                )}
+              </button>
+            )}
           </div>
         </div>
-      </Link>
+      </div>
 
       {/*    {!pathname.includes("books") && (
         <div>

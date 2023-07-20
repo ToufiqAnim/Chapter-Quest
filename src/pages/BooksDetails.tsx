@@ -2,14 +2,19 @@ import {
   useGetAllBooksQuery,
   useGetSingleBookQuery,
 } from "@/redux/features/book/bookApi";
+import { useAppSelector } from "@/redux/hooks";
 import { IBooks } from "@/types/interface";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FiEdit } from "react-icons/fi";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function BooksDetails() {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const { user } = useAppSelector((state) => state.user);
   const { data: book } = useGetSingleBookQuery(id!);
-
+  const userVerified = user?.email && book?.addedBook === user?.email;
   return (
     <>
       <div className="container mx-auto flex justify-evenly items-center mt-10">
@@ -23,9 +28,23 @@ function BooksDetails() {
             Get Ready to uncover the dark secrets and betrayals in the book.A
             thrilling adventure waits for you
           </p>
-          <button className="mt-3 bg-slate-800 text-white px-8 py-3 rounded text-xl">
-            Start Reading
-          </button>
+          <div className="flex gap-4 items-center">
+            <button className="mt-3 bg-slate-800 text-white px-8 py-3 rounded text-xl">
+              Start Reading
+            </button>
+            <div>
+              {userVerified && (
+                <div className="flex gap-3 items-center text-2xl">
+                  <Link to="/update-book">
+                    <FiEdit />
+                  </Link>
+                  <button>
+                    <RiDeleteBin6Line />
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
       <div className="container mx-auto p-28 flex justify-around items-center gap-28  bg-[#f1f1ee] shadow-lg mt-[-60px] mb-20">
