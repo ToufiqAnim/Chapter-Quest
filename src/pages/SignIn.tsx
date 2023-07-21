@@ -1,30 +1,9 @@
 import SignInForm from "@/compnents/SignInForm";
-import { auth } from "@/lb/firebase";
-import { setUser } from "@/redux/features/user/userSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { onAuthStateChanged } from "firebase/auth";
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+
 import { Link } from "react-router-dom";
 import image from "../assets/harry Potter 4.jpg";
 
 function SignIn() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const dispatch = useAppDispatch();
-  const path = location.state?.path?.pathname || "/";
-  console.log(location.state);
-  const { user } = useAppSelector((state) => state.user);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      dispatch(setUser(user?.email));
-    });
-
-    if (user.email) {
-      navigate(path, { replace: true });
-    }
-  }, [dispatch, user.email, path, navigate]);
   return (
     <div className="m-20">
       <div className="flex flex-col md:flex-row items-center xl:w-4/6 mx-auto ">

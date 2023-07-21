@@ -2,7 +2,7 @@ import { api } from "@/redux/api/apiSlice";
 
 const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation({
+    signin: builder.mutation({
       query: (data) => {
         return {
           url: "/auth/login",
@@ -11,7 +11,7 @@ const authApi = api.injectEndpoints({
         };
       },
     }),
-    register: builder.mutation({
+    signup: builder.mutation({
       query: (data) => {
         return {
           url: "/auth/signup",
@@ -23,4 +23,4 @@ const authApi = api.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useSigninMutation, useSignupMutation } = authApi;

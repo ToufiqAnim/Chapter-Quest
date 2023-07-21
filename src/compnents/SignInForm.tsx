@@ -1,6 +1,8 @@
-import { loginUser } from "@/redux/features/user/userSlice";
+import { useSigninMutation } from "@/redux/features/auth/authApi";
+import { setAuth } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 interface SignInFormInputs {
   email: string;
@@ -9,16 +11,32 @@ interface SignInFormInputs {
 
 export default function SignInForm() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [signin] = useSigninMutation();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<SignInFormInputs>();
-
-  const onSubmit = (data: SignInFormInputs) => {
-    dispatch(loginUser(data));
+  const onSubmit = async (data: SignInFormInputs) => {
+    try {
+      const response = await signin(data);
+      const loginData = response.data.data;
+      if (response.error) {
+        alert(response.error.data.errorMessages[0].message);
+      } else {
+        localStorage.clear();
+        dispatch(setAuth(loginData));
+        alert(response.data.message);
+        navigate("/");
+      }
+    } catch (error) {
+      alert("An unexpected error occurred. Please try again later.");
+    }
     reset();
+    // console.log(response);
   };
 
   return (

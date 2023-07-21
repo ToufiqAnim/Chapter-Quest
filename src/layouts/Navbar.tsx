@@ -4,23 +4,28 @@ import {
   BsFillJournalBookmarkFill,
 } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
-import { VscAccount } from "react-icons/vsc";
+
 import { MdOutlineAccountCircle } from "react-icons/md";
 
-import { AiOutlineBook, AiOutlineHome } from "react-icons/ai";
-import { Link, useLocation } from "react-router-dom";
-import { signOut } from "firebase/auth";
-import { auth } from "@/lb/firebase";
-import { setUser } from "@/redux/features/user/userSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {
+  AiOutlineBook,
+  AiOutlineHome,
+  AiOutlineRead,
+  AiOutlineStar,
+} from "react-icons/ai";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+
+import { useAppDispatch } from "@/redux/hooks";
+import { logout } from "@/redux/features/auth/authSlice";
 const Navbar = () => {
   const dispatch = useAppDispatch();
-  const location = useLocation();
-  const { user } = useAppSelector((state) => state.user);
-  const handleLogOut = () => {
-    signOut(auth);
-    dispatch(setUser(null));
-    window.location.reload();
+  const storedAuthData = localStorage.getItem("auth");
+  const navigate = useNavigate();
+  const token = storedAuthData ? JSON.parse(storedAuthData).token : null;
+  const handleLogout = () => {
+    localStorage.removeItem("auth");
+    dispatch(logout());
+    navigate("/");
   };
   return (
     <nav className=" top-0 shadow-md px-8 py-8 flex justify-evenly font-lobstar">
@@ -55,31 +60,25 @@ const Navbar = () => {
               </div>
             </li>
           </Link>
-
-          <Link to="/wishlist">
-            <li
-              className={
-                "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center  "
-              }
-            >
-              <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
-                <BsFillJournalBookmarkFill className={"w-6 h-6"} />
-                <p>Whishlist</p>
-              </div>
-            </li>
-          </Link>
-          <Link to="/account">
-            <li
-              className={
-                "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center "
-              }
-            >
-              <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
-                <MdOutlineAccountCircle className={"w-6 h-6"} />
-                <p>Account</p>
-              </div>
-            </li>
-          </Link>
+          {token && (
+            <>
+              <li className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                <NavLink to="books/add-book">Add Books</NavLink>
+              </li>
+              <li className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                <NavLink to="/wish-list">
+                  <AiOutlineStar />
+                  <span>Wishlist</span>
+                </NavLink>
+              </li>
+              <li className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                <NavLink to="/reading-list">
+                  <AiOutlineRead />
+                  <span>Reading List</span>
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
       <div className="flex gap-3 items-center">
@@ -97,23 +96,20 @@ const Navbar = () => {
             placeholder="Search book title, author, genre..."
           />
         </div>
-
-        {user?.email ? (
-          <div className="flex items-center gap-2">
-            <VscAccount className="w-6 h-6" />
-            <button
-              onClick={handleLogOut}
-              className="font-medium border-1 border-gray-500 text-xl"
-            >
-              Log Out
-            </button>
-          </div>
-        ) : (
+        {token ? (
           <Link to="/signin">
-            <div className="flex items-center gap-2">
-              <p className="font-medium text-xl">Sign In</p>
+            <div className="flex items-center gap-2" onClick={handleLogout}>
+              <p className="font-medium text-xl">Logout</p>
             </div>
           </Link>
+        ) : (
+          <>
+            <Link to="/signin">
+              <div className="flex items-center gap-2">
+                <p className="font-medium text-xl">Sign In</p>
+              </div>
+            </Link>
+          </>
         )}
       </div>
     </nav>

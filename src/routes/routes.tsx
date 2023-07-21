@@ -8,6 +8,8 @@ import Wishlist from "@/pages/Wishlist";
 import SignIn from "@/pages/SignIn";
 import SignUp from "@/pages/SignUp";
 import UpdateBook from "@/pages/UdateBook";
+import { PrivateRoute, PublicRoute } from "./PrivateRoute";
+import AddBooks from "@/pages/AddBooks";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -25,22 +27,59 @@ const routes = createBrowserRouter([
         path: "/books-details/:id",
         element: <BooksDetails />,
       },
+
       {
-        path: "/update-book/:id",
-        element: <UpdateBook />,
+        path: "books/add-book",
+        element: (
+          <PrivateRoute>
+            <AddBooks />
+          </PrivateRoute>
+        ),
       },
+      /*      {
+        path: "books/update/:id",
+        element: (
+          <PrivateRoute>
+            <EditBook />
+          </PrivateRoute>
+        ),
+      }, */
       {
         path: "/wishlist",
-        element: <Wishlist />,
+        element: (
+          <PrivateRoute>
+            <Wishlist />
+          </PrivateRoute>
+        ),
       },
+      /*       {
+        path: "/reading-list",
+        element: (
+          <PrivateRoute>
+            <ReadingList />
+          </PrivateRoute>
+        ),
+      }, */
       {
         path: "/signin",
-        element: <SignIn />,
+        element: (
+          <PublicRoute>
+            <SignIn />
+          </PublicRoute>
+        ),
       },
       {
         path: "/signup",
-        element: <SignUp />,
+        element: (
+          <PublicRoute>
+            <SignUp />
+          </PublicRoute>
+        ),
       },
+      /*   {
+        path: "*",
+        element: <NotFound />,
+      }, */
     ],
   },
 ]);

@@ -2,17 +2,6 @@ import React from "react";
 import { IBooks } from "../types/interface";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  useAddToWishlistMutation,
-  useGetWishlistsQuery,
-  useRemoveFromWishlistsMutation,
-} from "@/redux/features/whishlist/wishlistApi";
-import { useAppSelector } from "@/redux/hooks";
-import {
-  addToWishlist,
-  removeFromWishlist,
-} from "@/redux/features/whishlist/wishlistSlice";
-import { AiFillHeart, AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 interface IProps {
   book: IBooks;
@@ -22,28 +11,7 @@ export function BookCard({ book }: IProps) {
   const { _id, image, title, author, publicationDate, genre } = book;
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const { user } = useAppSelector((state) => state.user);
-  const { data: wishlists } = useGetWishlistsQuery(user.email!);
-  const [addToWishlistApi] = useAddToWishlistMutation();
-  const [removeFromWishlistApi] = useRemoveFromWishlistsMutation();
 
-  const handleWishlist = () => {
-    const payload = { userEmail: user.email, book: book };
-    dispatch(addToWishlist(book));
-    addToWishlistApi(payload);
-    // toast.success(`Successfully, ${book.title} added to wishlist`);
-  };
-  const handleRemoveWishlist = () => {
-    const payload = { email: user?.email, bookId: book?._id };
-    dispatch(removeFromWishlist(book));
-    removeFromWishlistApi(payload);
-    // toast.success(`Successfully, ${book.title} removed from wishlist`);
-  };
-
-  const wishlistedBook = wishlists?.books?.find(
-    (wishlist: IBooks) => wishlist?._id === book?._id
-  );
-  const userVerified = user?.email && book?.addedBook === user?.email;
   return (
     <div>
       <div className=" shadow-xl shadow-gray-400 w-full lg:max-w-full lg:flex items-center">
@@ -86,15 +54,6 @@ export function BookCard({ book }: IProps) {
               <p className="text-gray-600 font-lobstar">{genre}</p>
               <p className="text-gray-600 font-lobstar">{publicationDate}</p>
             </div>
-            {userVerified && (
-              <button className="btn btn-circle text-error text-2xl">
-                {wishlistedBook ? (
-                  <AiFillStar onClick={handleRemoveWishlist} />
-                ) : (
-                  <AiOutlineStar onClick={handleWishlist} />
-                )}
-              </button>
-            )}
           </div>
         </div>
       </div>
