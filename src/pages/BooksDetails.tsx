@@ -16,13 +16,13 @@ function BooksDetails() {
   const { data, isLoading } = useGetSingleBookQuery(id);
   const book = data?.data;
 
-  let publisher = false;
+  /*   let publisher = false;
 
   if (user != null) {
     if (user?.id === book?.publisher) {
       publisher = true;
     }
-  }
+  } */
   console.log(publisher, user);
   return (
     <>
@@ -47,12 +47,11 @@ function BooksDetails() {
                 <button className="mt-3 bg-slate-800 text-white px-8 py-3 rounded text-xl">
                   Start Reading
                 </button>
-                {publisher && (
+                {user && (
                   <div>
                     <div className="flex gap-3 items-center text-2xl">
                       <Link to="/update-book">
                         <FiEdit />
-                        <p>Edit</p>
                       </Link>
                       <button>
                         <RiDeleteBin6Line />

@@ -87,9 +87,11 @@ const AddBooks = () => {
                 <label className="label block text-gray-700">Description</label>
                 <input
                   type="text"
-                  placeholder="Enter Image Url"
+                  placeholder="Enter Book Description"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  /*   {...register("description", { required: "author name is required" })} */
+                  {...register("description", {
+                    required: "author name is required",
+                  })}
                 />
               </div>
               <div className="form-control w-full max-w-xs">
@@ -111,7 +113,7 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter  Publication Date"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("genre", {
+                  {...register("publicationDate", {
                     required: "Publication Date",
                   })}
                 />
