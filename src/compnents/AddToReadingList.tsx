@@ -1,7 +1,7 @@
+import toast from "react-hot-toast";
 import { useAddToReadingListMutation } from "../redux/features/user/userApi";
-import { message } from "antd";
-import React from "react";
-import { AiOutlineRead } from "react-icons/ai";
+
+import { FaBookReader } from "react-icons/fa";
 
 const AddToReadingList = (id) => {
   const [addToReadingList, { isLoading }] = useAddToReadingListMutation();
@@ -10,13 +10,13 @@ const AddToReadingList = (id) => {
     try {
       const response = await addToReadingList(id);
       if ("error" in response) {
-        message.error((response as any).error.data.errorMessages[0].message);
+        toast.error((response as any).error.data.errorMessages[0].message);
       } else {
-        message.success(response.data.message);
+        toast.success(response.data.message);
       }
     } catch (error) {
       console.error("Unexpected error occurred:", error);
-      message.error("An unexpected error occurred. Please try again later.");
+      toast.error("An unexpected error occurred. Please try again later.");
     }
   };
   return (
@@ -27,7 +27,7 @@ const AddToReadingList = (id) => {
         </div>
       ) : (
         <button onClick={handleAddToReadingList}>
-          <AiOutlineRead size={25} />
+          <FaBookReader size={25} />
         </button>
       )}
     </>

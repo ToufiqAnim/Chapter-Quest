@@ -29,7 +29,7 @@ const EditBook = () => {
         toast.error((response as any).error.error);
       } else {
         toast.success(response.data.message);
-        navigate(`/book-details/${id}`);
+        navigate(`/books-details/${id}`);
       }
     } catch (error) {
       console.error("Unexpected error occurred:", error);

@@ -1,12 +1,11 @@
-import AddToReadingList from "@/compnents/AddToReadingList";
-import { useGetWishlistQuery } from "@/redux/features/user/userApi";
+import { useGetReadingListQuery } from "@/redux/features/user/userApi";
 import { IBooks } from "@/types/interface";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-const Wishlist = () => {
-  const { data, error, isLoading } = useGetWishlistQuery(undefined);
-  console.log(data);
+const ReadingList = () => {
+  const { data, error, isLoading } = useGetReadingListQuery(undefined);
+
   if (isLoading) {
     return (
       <div className="flex justify-center h-[100vh]">
@@ -28,14 +27,13 @@ const Wishlist = () => {
   }
 
   const books = data.data;
-
   return (
-    <div className="w-[100%] mx-auto py-8">
-      <div className="h-[100vh] overflow-auto">
+    <div className="w-[92%] mx-auto py-8">
+      <div className="h-[650px] overflow-auto">
         <table className="w-full table-fixed min-w-[1000px] border">
           <thead className="position-sticky top-0 bg-gray-100 text-gray-600">
             <tr className="">
-              <th className="py-2 text-left pl-5 break-all">Title</th>
+              <th className="py-2 text-left pl-5 break-all">Book Title</th>
               <th className="w-32 text-center break-all">Publish Date</th>
               <th className="w-32 text-center break-all">Genre</th>
               <th className="w-48 text-center break-all">Action</th>
@@ -65,16 +63,18 @@ const Wishlist = () => {
                     </div>
                   </div>
                 </td>
-                <td className="text-center">{book.publicationDate}</td>
+                <td className="text-center">
+                  {book.publicationDate.toString()}
+                </td>
                 <td className="text-center">{book.genre}</td>
                 <td className="text-center">
                   <div className="flex items-center justify-center space-x-6">
-                    <div className="p-2 rounded-full border flex items-center">
-                      <AddToReadingList id={book._id} />
+                    {/*   <div className="p-2 rounded-full border flex items-center">
+                      <AddToFinishedBooks id={books-_id} />
                     </div>
                     <div className="p-2 rounded-full border flex items-center">
-                      {/* <RemoveFromWishList id={book._id} /> */}
-                    </div>
+                      <RemoveFromReadingList id={books-_id} />
+                    </div> */}
                   </div>
                 </td>
               </tr>
@@ -86,4 +86,4 @@ const Wishlist = () => {
   );
 };
 
-export default Wishlist;
+export default ReadingList;
