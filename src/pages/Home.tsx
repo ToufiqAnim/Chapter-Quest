@@ -37,9 +37,8 @@ const Home = () => {
           <div>
             <h1 className="text-2xl font-lobstar">Popular Now</h1>
           </div>
-          <div>
-            <Books />
-          </div>
+
+          <Books />
         </div>
       </main>
     </>

@@ -9,6 +9,7 @@ import { MdOutlineAccountCircle } from "react-icons/md";
 
 import {
   AiOutlineBook,
+  AiOutlineCheckCircle,
   AiOutlineHome,
   AiOutlineRead,
   AiOutlineStar,
@@ -17,11 +18,24 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import { useAppDispatch } from "@/redux/hooks";
 import { logout } from "@/redux/features/auth/authSlice";
+import { useState } from "react";
 const Navbar = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isSearchOpen, setSearchOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
   const storedAuthData = localStorage.getItem("auth");
   const navigate = useNavigate();
   const token = storedAuthData ? JSON.parse(storedAuthData).token : null;
+
+  const onFinishHandle = (e) => {
+    e.preventDefault();
+    navigate(`/search/${encodeURIComponent(searchTerm)}`);
+  };
+  const handleSearch = () => {
+    setSearchOpen(!isSearchOpen);
+    setMenuOpen(false);
+  };
   const handleLogout = () => {
     localStorage.removeItem("auth");
     dispatch(logout());
@@ -29,26 +43,13 @@ const Navbar = () => {
   };
   return (
     <nav className=" top-0 shadow-md px-8 py-8 flex justify-evenly font-lobstar">
-      <div className=" flex items-center gap-2">
+      <NavLink to="/" className=" flex items-center gap-2">
         <BsBook className="cursor-pointer w-12 h-12  " />
         <h1 className="font-medium text-3xl ">Chapter Quest</h1>
-      </div>
+      </NavLink>
       <div className=" flex   items-center ">
         <ul className=" flex items-center gap-6 ">
-          <Link to="/">
-            <li
-              className={
-                " rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center "
-              }
-            >
-              <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center ">
-                <AiOutlineHome className={"w-6 h-6  "} />
-                <p>Home</p>
-              </div>
-            </li>
-          </Link>
-
-          <Link to="/books">
+          <NavLink to="/books">
             <li
               className={
                 "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   "
@@ -59,24 +60,57 @@ const Navbar = () => {
                 <p>Books</p>
               </div>
             </li>
-          </Link>
+          </NavLink>
           {token && (
             <>
-              <li className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
-                <NavLink to="books/add-book">Add Books</NavLink>
-              </li>
-              <li className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
-                <NavLink to="/wishlist">
-                  <AiOutlineStar />
-                  <span>Wishlist</span>
-                </NavLink>
-              </li>
-              <li className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
-                <NavLink to="/reading-list">
-                  <AiOutlineRead />
-                  <span>Reading List</span>
-                </NavLink>
-              </li>
+              <NavLink to="books/add-book">
+                <li
+                  className={
+                    "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   "
+                  }
+                >
+                  <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                    <AiOutlineBook className={"w-6 h-6"} />
+                    <p>Add Books</p>
+                  </div>
+                </li>
+              </NavLink>
+              <NavLink to="/wishlist">
+                <li
+                  className={
+                    "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   "
+                  }
+                >
+                  <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                    <AiOutlineStar className={"w-6 h-6"} />
+                    <p>Wishlist</p>
+                  </div>
+                </li>
+              </NavLink>
+              <NavLink to="/reading-list">
+                <li
+                  className={
+                    "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   "
+                  }
+                >
+                  <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                    <AiOutlineRead className={"w-6 h-6"} />
+                    <p>Reading List</p>
+                  </div>
+                </li>
+              </NavLink>
+              <NavLink to="finished-books">
+                <li
+                  className={
+                    "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   "
+                  }
+                >
+                  <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                    <AiOutlineCheckCircle className={"w-6 h-6"} />
+                    <p>Finished Books</p>
+                  </div>
+                </li>
+              </NavLink>
             </>
           )}
         </ul>
@@ -84,31 +118,36 @@ const Navbar = () => {
       <div className="flex gap-3 items-center">
         {/* search bar */}
 
-        <div className=" flex items-center h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
-          <div className="grid place-items-center h-full w-16 text-black">
+        <div className=" flex items-center h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden ">
+          <form action="" onSubmit={onFinishHandle} className="border-gray-400">
+            <input
+              className="outline-none text-sm text-gray-700 p-2 "
+              type="text"
+              id="search"
+              placeholder="Search book title, author, genre..."
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </form>
+          {/*   <div
+            className="grid place-items-center h-full w-16 text-black"
+            onClick={() => handleSearch()}
+          >
             <BsSearch />
-          </div>
-
-          <input
-            className="outline-none text-sm text-gray-700 pr-2"
-            type="text"
-            id="search"
-            placeholder="Search book title, author, genre..."
-          />
+          </div> */}
         </div>
         {token ? (
-          <Link to="/signin">
+          <NavLink to="/signin">
             <div className="flex items-center gap-2" onClick={handleLogout}>
               <p className="font-medium text-xl">Logout</p>
             </div>
-          </Link>
+          </NavLink>
         ) : (
           <>
-            <Link to="/signin">
+            <NavLink to="/signin">
               <div className="flex items-center gap-2">
                 <p className="font-medium text-xl">Sign In</p>
               </div>
-            </Link>
+            </NavLink>
           </>
         )}
       </div>

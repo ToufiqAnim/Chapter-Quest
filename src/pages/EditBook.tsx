@@ -3,7 +3,7 @@ import {
   useUpdateBookMutation,
 } from "@/redux/features/book/bookApi";
 import { IBooks } from "@/types/interface";
-
+import image from "../assets/harry Potter 4.jpg";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -38,8 +38,14 @@ const EditBook = () => {
   };
   return (
     <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content w-[100%] md:w-[70%] lg:w-[60%] flex-col lg:flex-row-reverse">
-        <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
+      <div className="flex flex-col md:flex-row items-center xl:w-4/6 mx-auto ">
+        <div className="md:hidden lg:block w-full md:w-1/2 xl:w-2/3 ">
+          <img src={image} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div
+          className="w-full md:max-w-md lg:max-w-full md:mx-auto  md:w-1/2  px-6 lg:px-16 xl:px-12
+         items-center justify-center"
+        >
           <div className="card-body">
             <h1 className="text-3xl font-bold text-center">Edit Book</h1>
 

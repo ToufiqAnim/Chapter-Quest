@@ -96,9 +96,9 @@ const Books = () => {
           {!pathname.includes("/books")
             ? data?.data
                 .slice(0, 10)
-                .map((book: IBooks) => <BookCard book={book} key={book._id} />)
+                .map((book: IBooks) => <BookCard {...book} key={book._id} />)
             : filteredBooks.map((book: IBooks) => (
-                <BookCard book={book} key={book._id} />
+                <BookCard key={book._id} {...book} />
               ))}
         </div>
       )}

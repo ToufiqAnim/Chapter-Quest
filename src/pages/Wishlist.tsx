@@ -1,4 +1,5 @@
 import AddToReadingList from "@/compnents/AddToReadingList";
+import RemoveFromWishList from "@/compnents/RemoveFromWishList";
 import { useGetWishlistQuery } from "@/redux/features/user/userApi";
 import { IBooks } from "@/types/interface";
 import toast from "react-hot-toast";
@@ -6,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Wishlist = () => {
   const { data, error, isLoading } = useGetWishlistQuery(undefined);
-  console.log(data);
+
   if (isLoading) {
     return (
       <div className="flex justify-center h-[100vh]">
@@ -73,7 +74,7 @@ const Wishlist = () => {
                       <AddToReadingList id={book._id} />
                     </div>
                     <div className="p-2 rounded-full border flex items-center">
-                      {/* <RemoveFromWishList id={book._id} /> */}
+                      <RemoveFromWishList id={book._id} />
                     </div>
                   </div>
                 </td>

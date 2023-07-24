@@ -13,7 +13,7 @@ interface SignInFormInputs {
 export default function SignInForm() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [signin] = useSigninMutation();
+  const [signin, { isLoading }] = useSigninMutation();
 
   const {
     register,
@@ -72,12 +72,18 @@ export default function SignInForm() {
         )}
       </div>
       <div className="mt-3">
-        <button
-          className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
+        {isLoading ? (
+          <div className="flex justify-center ">
+            <button className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-gray-900"></button>
+          </div>
+        ) : (
+          <button
+            className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
               px-4 py-3 mt-6"
-        >
-          Log In
-        </button>
+          >
+            Log In
+          </button>
+        )}
       </div>
     </form>
   );

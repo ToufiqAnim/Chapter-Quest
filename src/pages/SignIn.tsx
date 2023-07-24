@@ -25,12 +25,13 @@ function SignIn() {
             <hr className="my-4 border-gray-300 w-full" />
 
             <p className="mt-4 ">
+              <span>Don't have an account? </span>
               <Link to="/signup">
                 <a
                   href="#"
                   className="text-blue-500 hover:text-blue-700 font-semibold"
                 >
-                  Create an account
+                  Signup Here
                 </a>
               </Link>
             </p>

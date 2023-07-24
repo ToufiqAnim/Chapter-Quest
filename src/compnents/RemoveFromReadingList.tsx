@@ -1,14 +1,15 @@
+import { useRemoveFromReadingListMutation } from "../redux/features/user/userApi";
+
 import toast from "react-hot-toast";
-import { useAddToReadingListMutation } from "../redux/features/user/userApi";
+import { AiOutlineDelete } from "react-icons/ai";
 
-import { BiBookReader } from "react-icons/bi";
+const RemoveFromReadingList = (id) => {
+  const [removeFromReadingList, { isLoading }] =
+    useRemoveFromReadingListMutation();
 
-const AddToReadingList = (id) => {
-  const [addToReadingList, { isLoading }] = useAddToReadingListMutation();
-
-  const handleAddToReadingList = async () => {
+  const handleRemoveFromReadingList = async () => {
     try {
-      const response = await addToReadingList(id);
+      const response = await removeFromReadingList(id);
       if ("error" in response) {
         toast.error((response as any).error.data.errorMessages[0].message);
       } else {
@@ -19,6 +20,7 @@ const AddToReadingList = (id) => {
       toast.error("An unexpected error occurred. Please try again later.");
     }
   };
+
   return (
     <>
       {isLoading ? (
@@ -26,12 +28,12 @@ const AddToReadingList = (id) => {
           <button className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-gray-900"></button>
         </div>
       ) : (
-        <button onClick={handleAddToReadingList}>
-          <BiBookReader size={30} />
+        <button onClick={handleRemoveFromReadingList}>
+          <AiOutlineDelete size={25} fill="red" />
         </button>
       )}
     </>
   );
 };
 
-export default AddToReadingList;
+export default RemoveFromReadingList;

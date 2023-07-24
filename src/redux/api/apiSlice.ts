@@ -18,6 +18,13 @@ export const api = createApi({
       return newHeaders;
     },
   }),
-  tagTypes: ["Books", "Book", "Review", "Wishlist", "ReadingList"],
+  tagTypes: [
+    "Books",
+    "Book",
+    "Review",
+    "Wishlist",
+    "ReadingList",
+    "FinishedBooks",
+  ],
   endpoints: () => ({}),
 });

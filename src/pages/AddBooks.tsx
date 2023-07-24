@@ -41,7 +41,7 @@ const AddBooks = () => {
          items-center justify-center"
         >
           <div className="card-body">
-            <h1 className="text-3xl font-bold text-center">Create Book</h1>
+            <h1 className="text-3xl font-bold text-center">Add Book</h1>
             <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control w-full max-w-xs">
                 <label className="label block text-gray-700">Book Title</label>

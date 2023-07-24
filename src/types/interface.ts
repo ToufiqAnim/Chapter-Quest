@@ -12,27 +12,10 @@ export interface IBooks {
 }
 
 export interface IReview {
-  userEmail: string;
   review: string;
+  reviewer: object;
 }
 export interface IWishlist {
   email: string;
   books: IBooks[];
 }
-
-export type SuccessResponse = {
-  data: {
-    message: string;
-  };
-};
-
-export type ErrorResponse = {
-  error: {
-    data: {
-      errorMessages: {
-        message: string;
-      }[];
-    };
-  };
-};
-export type MyResponse = SuccessResponse | ErrorResponse;

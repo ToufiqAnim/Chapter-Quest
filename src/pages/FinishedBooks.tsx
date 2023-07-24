@@ -1,12 +1,11 @@
-import AddToFinishedBooks from "@/compnents/AddToFinishedBooks";
-import RemoveFromReadingList from "@/compnents/RemoveFromReadingList";
-import { useGetReadingListQuery } from "@/redux/features/user/userApi";
+import RemoveFromFinishedBooks from "@/compnents/RemoveFromFinishedBooks";
+import { useGetFinishedBooksQuery } from "@/redux/features/user/userApi";
 import { IBooks } from "@/types/interface";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-const ReadingList = () => {
-  const { data, error, isLoading } = useGetReadingListQuery(undefined);
+const FinishedBooks = () => {
+  const { data, error, isLoading } = useGetFinishedBooksQuery(undefined);
 
   if (isLoading) {
     return (
@@ -35,7 +34,7 @@ const ReadingList = () => {
         <table className="w-full table-fixed min-w-[1000px] border">
           <thead className="position-sticky top-0 bg-gray-100 text-gray-600">
             <tr className="">
-              <th className="py-2 text-left pl-5 break-all">Book Title</th>
+              <th className="py-2 text-center break-all">Book Title</th>
               <th className="w-32 text-center break-all">Publish Date</th>
               <th className="w-32 text-center break-all">Genre</th>
               <th className="w-48 text-center break-all">Action</th>
@@ -55,7 +54,7 @@ const ReadingList = () => {
                   />
                   <div>
                     <Link
-                      to={`/books-details/${book._id}`}
+                      to={`/book-details/${book._id}`}
                       className="text-lg font-semibold text-gray-700"
                     >
                       {book.title}
@@ -65,15 +64,14 @@ const ReadingList = () => {
                     </div>
                   </div>
                 </td>
-                <td className="text-center">{book.publicationDate}</td>
+                <td className="text-center">
+                  {book.publicationDate.toString()}
+                </td>
                 <td className="text-center">{book.genre}</td>
                 <td className="text-center">
                   <div className="flex items-center justify-center space-x-6">
                     <div className="p-2 rounded-full border flex items-center">
-                      <AddToFinishedBooks id={books._id} />
-                    </div>
-                    <div className="p-2 rounded-full border flex items-center">
-                      <RemoveFromReadingList id={books._id} />
+                      <RemoveFromFinishedBooks id={book._id} />
                     </div>
                   </div>
                 </td>
@@ -86,4 +84,4 @@ const ReadingList = () => {
   );
 };
 
-export default ReadingList;
+export default FinishedBooks;

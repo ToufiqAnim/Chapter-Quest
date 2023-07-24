@@ -8,6 +8,8 @@ import { Link, useParams } from "react-router-dom";
 import DeleteBook from "./DeleteBook";
 import AddToWishlist from "@/compnents/AddToWishlist";
 import AddToReadingList from "@/compnents/AddToReadingList";
+import AddReview from "@/compnents/PostReviews";
+import Reviews from "@/compnents/Reviews";
 
 function BooksDetails() {
   const { id } = useParams();
@@ -36,39 +38,34 @@ function BooksDetails() {
               <p className="text-md mb-6">
                 {book?.description.slice(0, 200)}...
               </p>
-              <div className="flex gap-4 items-center">
+              <div className="flex gap-4 items-center justify-between">
                 <button className="mt-3 bg-slate-800 text-white px-8 py-3 rounded text-xl">
                   Start Reading
                 </button>
                 {user && (
-                  <div>
-                    <div className="flex gap-3 items-center ">
-                      <Link to={`/books/edit/${book?._id}`}>
-                        <FiEdit size={30} />
-                      </Link>
-                      <button>
+                  <div className="">
+                    <div className="flex gap-5 items- center">
+                      <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                        <Link to={`/books/edit/${book?._id}`}>
+                          <FiEdit size={30} />
+                        </Link>
+                      </div>
+
+                      <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
                         <DeleteBook id={book?._id} />
-                      </button>
+                      </div>
+
+                      <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                        <AddToWishlist id={book?._id} />
+                      </div>
+
+                      <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                        <AddToReadingList id={book?._id} />
+                      </div>
                     </div>
                   </div>
                 )}
-                <div className="flex justify-end space-x-8">
-                  <button className="border p-2 flex rounded-full">
-                    <AddToWishlist id={book?._id} />
-                  </button>
-                  <div className="border p-2 flex rounded-full">
-                    <AddToReadingList id={book?._id} />
-                  </div>
-                </div>
               </div>
-
-              {/*   <div className="flex justify-end space-x-8">
-                <div className="border p-2 flex rounded-full">
-                  <AddToWishList id={book?._id} />
-                </div>
-                <div className="border p-2 flex rounded-full">
-                  <AddToReadingList id={book?._id} />
-                </div>*/}
             </div>
           </div>
           <div className="container mx-auto p-28 flex justify-around items-center gap-28  bg-[#f1f1ee] shadow-lg mt-[-60px] mb-20">
@@ -78,14 +75,8 @@ function BooksDetails() {
 
               <div className="flex flex-col gap-6">
                 <h1 className="text-3xl">Reviews</h1>
-                {/*      <div>
-                  <p className="text-2xl mb-4">Rob Lee</p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Nihil numquam quasi consequatur repellendus vitae magnam,
-                    beatae quas
-                  </p>
-                </div> */}
+                <AddReview id={book?._id} />
+                <Reviews id={book?._id} />
               </div>
             </div>
             <div className=" font-lobstar">
