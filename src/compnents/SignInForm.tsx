@@ -2,6 +2,7 @@ import { useSigninMutation } from "@/redux/features/auth/authApi";
 import { setAuth } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 interface SignInFormInputs {
@@ -21,22 +22,25 @@ export default function SignInForm() {
     reset,
   } = useForm<SignInFormInputs>();
   const onSubmit = async (data: SignInFormInputs) => {
+    const response = await signin(data);
+
     try {
       const response = await signin(data);
-      const loginData = response.data.data;
-      if (response.error) {
-        alert(response.error.data.errorMessages[0].message);
-      } else {
+      const loginData = await (response as any).data.data;
+      if ("data" in response) {
         localStorage.clear();
         dispatch(setAuth(loginData));
-        alert(response.data.message);
+
+        toast.success((response as any).data.message);
         navigate("/");
       }
     } catch (error) {
-      alert("An unexpected error occurred. Please try again later.");
+      const response = await signin(data);
+      toast.error((response as any).error.data.message);
     }
+
     reset();
-    // console.log(response);
+    console.log(response);
   };
 
   return (

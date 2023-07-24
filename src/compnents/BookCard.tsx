@@ -2,13 +2,15 @@ import React from "react";
 import { IBooks } from "../types/interface";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { MdDescription } from "react-icons/md";
 
 interface IProps {
   book: IBooks;
 }
 
 export function BookCard({ book }: IProps) {
-  const { _id, image, title, author, publicationDate, genre } = book;
+  const { _id, image, title, author, publicationDate, genre, description } =
+    book;
   const { pathname } = useLocation();
   const dispatch = useDispatch();
 
@@ -36,9 +38,7 @@ export function BookCard({ book }: IProps) {
               {title}
             </div>
             <p className="text-gray-500 text-base font-lobstar">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptatibus quia, Nonea! Maiores et perferendis eaque,
-              exercitationem praesentium nihil.
+              {description.slice(0, 200)}...
             </p>
           </div>
           <div className="flex items-center">

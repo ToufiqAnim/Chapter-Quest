@@ -1,14 +1,21 @@
-import { useAddBookMutation } from "@/redux/features/book/bookApi";
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import {
+  useGetSingleBookQuery,
+  useUpdateBookMutation,
+} from "@/redux/features/book/bookApi";
+import { IBooks } from "@/types/interface";
 
-import image from "../assets/harry Potter 4.jpg";
-import { IBooks, MyResponse } from "@/types/interface";
 import toast from "react-hot-toast";
-
-const AddBooks = () => {
+import { useNavigate, useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+const EditBook = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [addBook, { isLoading }] = useAddBookMutation();
+
+  const [updateBook, { isLoading }] = useUpdateBookMutation();
+
+  const { data } = useGetSingleBookQuery(id);
+
+  const book = data?.data;
   const {
     register,
     handleSubmit,
@@ -17,31 +24,25 @@ const AddBooks = () => {
   } = useForm<IBooks>();
   const onSubmit = async (data: IBooks) => {
     try {
-      const response = await addBook(data);
-
+      const response = await updateBook({ id, data });
       if ("error" in response) {
-        toast.error((response as any).error.data.message);
-      } else if ("data" in response) {
-        toast.success((response as any).data.message);
+        toast.error((response as any).error.error);
+      } else {
+        toast.success(response.data.message);
+        navigate(`/book-details/${id}`);
       }
     } catch (error) {
+      console.error("Unexpected error occurred:", error);
       toast.error("An unexpected error occurred. Please try again later.");
     }
-
-    reset();
   };
   return (
     <div className="hero min-h-screen bg-base-200">
-      <div className="flex flex-col md:flex-row items-center xl:w-4/6 mx-auto ">
-        <div className="md:hidden lg:block w-full md:w-1/2 xl:w-2/3 ">
-          <img src={image} alt="" className="w-full h-full object-cover" />
-        </div>
-        <div
-          className=" w-full md:max-w-md lg:max-w-full md:mx-auto  md:w-1/2  px-6 lg:px-16 xl:px-12
-         items-center justify-center"
-        >
+      <div className="hero-content w-[100%] md:w-[70%] lg:w-[60%] flex-col lg:flex-row-reverse">
+        <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
           <div className="card-body">
-            <h1 className="text-3xl font-bold text-center">Create Book</h1>
+            <h1 className="text-3xl font-bold text-center">Edit Book</h1>
+
             <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control w-full max-w-xs">
                 <label className="label block text-gray-700">Book Title</label>
@@ -49,7 +50,8 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter Book Title"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("title", { required: "title is required" })}
+                  {...register("title")}
+                  defaultValue={book?.title}
                 />
               </div>
               <div className="form-control w-full max-w-xs">
@@ -58,9 +60,7 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter Author Name"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("author", {
-                    required: "author name is required",
-                  })}
+                  {...register("author")}
                 />
               </div>
               <div className="form-control w-full max-w-xs">
@@ -69,9 +69,7 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter Image Url"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("image", {
-                    required: "author name is required",
-                  })}
+                  {...register("image")}
                 />
               </div>
               <div className="form-control w-full max-w-xs">
@@ -80,9 +78,7 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter Book Description"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("description", {
-                    required: "author name is required",
-                  })}
+                  {...register("description")}
                 />
               </div>
               <div className="form-control w-full max-w-xs">
@@ -91,9 +87,7 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter Book Genre"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("genre", {
-                    required: "genre required",
-                  })}
+                  {...register("genre")}
                 />
               </div>
               <div className="form-control w-full max-w-xs">
@@ -104,14 +98,12 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter  Publication Date"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("publicationDate", {
-                    required: "Publication Date",
-                  })}
+                  {...register("publicationDate")}
                 />
               </div>
 
               <button className="mt-3 bg-slate-800 text-white px-6 py-2 rounded">
-                Add Book
+                Edit Book
               </button>
             </form>
           </div>
@@ -121,4 +113,4 @@ const AddBooks = () => {
   );
 };
 
-export default AddBooks;
+export default EditBook;

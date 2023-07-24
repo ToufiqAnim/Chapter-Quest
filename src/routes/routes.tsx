@@ -10,6 +10,7 @@ import SignUp from "@/pages/SignUp";
 import UpdateBook from "@/pages/UdateBook";
 import { PrivateRoute, PublicRoute } from "./PrivateRoute";
 import AddBooks from "@/pages/AddBooks";
+import EditBook from "@/pages/EditBook";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -36,14 +37,14 @@ const routes = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      /*      {
-        path: "books/update/:id",
+      {
+        path: "books/edit/:id",
         element: (
           <PrivateRoute>
             <EditBook />
           </PrivateRoute>
         ),
-      }, */
+      },
       {
         path: "/wishlist",
         element: (

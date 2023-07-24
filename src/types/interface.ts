@@ -1,11 +1,14 @@
 export interface IBooks {
   _id: string;
   title: string;
-  author: string;
-  genre: string;
   image: string;
+  author: string;
+  description: string;
+  genre: string;
   publicationDate: string;
-  addedBook: string | null;
+  publisher?: string;
+  reviews?: object[];
+  createdAt?: Date;
 }
 
 export interface IReview {
@@ -16,3 +19,20 @@ export interface IWishlist {
   email: string;
   books: IBooks[];
 }
+
+export type SuccessResponse = {
+  data: {
+    message: string;
+  };
+};
+
+export type ErrorResponse = {
+  error: {
+    data: {
+      errorMessages: {
+        message: string;
+      }[];
+    };
+  };
+};
+export type MyResponse = SuccessResponse | ErrorResponse;

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
+import toast from "react-hot-toast";
 interface IAuth {
   user: object | null;
   token: string | null;
@@ -29,7 +29,7 @@ const authSlice = createSlice({
     },
     logout: (state) => {
       state.token = null;
-      alert("Logging Out");
+      toast.success("Logging Out");
     },
   },
 });

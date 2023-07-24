@@ -8,7 +8,7 @@ export const userApi = api.injectEndpoints({
     }),
     addToWishList: builder.mutation({
       query: ({ id }) => ({
-        url: `books/addToWishList/${id}`,
+        url: `/users/addToWishList/${id}`,
         method: "POST",
       }),
       invalidatesTags: ["Wishlist"],

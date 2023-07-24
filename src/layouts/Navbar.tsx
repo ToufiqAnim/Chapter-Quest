@@ -66,7 +66,7 @@ const Navbar = () => {
                 <NavLink to="books/add-book">Add Books</NavLink>
               </li>
               <li className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
-                <NavLink to="/wish-list">
+                <NavLink to="/wishlist">
                   <AiOutlineStar />
                   <span>Wishlist</span>
                 </NavLink>

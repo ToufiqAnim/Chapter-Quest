@@ -1,8 +1,9 @@
 import { useSignupMutation } from "@/redux/features/auth/authApi";
 import { useAppDispatch } from "@/redux/hooks";
+import { renderToStaticMarkup } from "react-dom/server";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
+import toast from "react-hot-toast";
 interface ISignUpFormInputs {
   name: string;
   email: string;
@@ -22,10 +23,10 @@ export default function SignUpForm() {
   const onSubmit = async (data: ISignUpFormInputs) => {
     try {
       const response = await signup(data);
-      if (response.error) {
-        alert("Already an account is using this Email");
-      } else {
-        alert(response.data.message);
+      if ("error" in response) {
+        toast.error("Already an account is using this Email");
+      } else if ("data " in response) {
+        toast.success(response.data.message);
         navigate("/signin");
       }
     } catch (error) {
