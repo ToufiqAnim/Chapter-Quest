@@ -1,6 +1,8 @@
-import { useSigninMutation } from "@/redux/features/auth/authApi";
-import { setAuth } from "@/redux/features/auth/authSlice";
-import { useAppDispatch } from "@/redux/hooks";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useSigninMutation } from "../redux/features/auth/authApi";
+import React from "react";
+import { setAuth } from "../redux/features/auth/authSlice";
+import { useAppDispatch } from "../redux/hooks";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -22,8 +24,6 @@ export default function SignInForm() {
     reset,
   } = useForm<SignInFormInputs>();
   const onSubmit = async (data: SignInFormInputs) => {
-    const response = await signin(data);
-
     try {
       const response = await signin(data);
       const loginData = await (response as any).data.data;
@@ -31,7 +31,7 @@ export default function SignInForm() {
         localStorage.clear();
         dispatch(setAuth(loginData));
 
-        toast.success((response as any).data.message);
+        toast.success(response.data.message);
         navigate("/");
       }
     } catch (error) {
@@ -40,7 +40,6 @@ export default function SignInForm() {
     }
 
     reset();
-    console.log(response);
   };
 
   return (

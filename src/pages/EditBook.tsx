@@ -1,9 +1,10 @@
+import React from "react";
 import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
-} from "@/redux/features/book/bookApi";
-import { IBooks } from "@/types/interface";
-import image from "../assets/harry Potter 4.jpg";
+} from "../redux/features/book/bookApi";
+import { IBooks } from "../types/interface";
+
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -11,7 +12,7 @@ const EditBook = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [updateBook, { isLoading }] = useUpdateBookMutation();
+  const [updateBook] = useUpdateBookMutation();
 
   const { data } = useGetSingleBookQuery(id);
 
@@ -19,7 +20,7 @@ const EditBook = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+
     reset,
   } = useForm<IBooks>();
   const onSubmit = async (data: IBooks) => {
@@ -35,12 +36,17 @@ const EditBook = () => {
       console.error("Unexpected error occurred:", error);
       toast.error("An unexpected error occurred. Please try again later.");
     }
+    reset();
   };
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="flex flex-col md:flex-row items-center xl:w-4/6 mx-auto ">
         <div className="md:hidden lg:block w-full md:w-1/2 xl:w-2/3 ">
-          <img src={image} alt="" className="w-full h-full object-cover" />
+          <img
+            src="https://i.ibb.co/7C58r24/harry-Potter-4.webp"
+            alt=""
+            className="w-full h-full object-cover"
+          />
         </div>
         <div
           className="w-full md:max-w-md lg:max-w-full md:mx-auto  md:w-1/2  px-6 lg:px-16 xl:px-12

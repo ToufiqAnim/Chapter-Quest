@@ -1,8 +1,9 @@
+import React from "react";
 import { IBooks } from "../types/interface";
 import BookCard from "../compnents/BookCard";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useGetAllBooksQuery } from "@/redux/features/book/bookApi";
+import { useGetAllBooksQuery } from "../redux/features/book/bookApi";
 
 const Books = () => {
   const { pathname } = useLocation();

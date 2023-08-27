@@ -1,51 +1,51 @@
-import { api } from "@/redux/api/apiSlice";
+import api from '../../api/apiSlice';
 
 const bookApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllBooks: builder.query({
-      query: () => "/books",
-      providesTags: ["Books"],
+      query: () => '/books',
+      providesTags: ['Books'],
     }),
     getSingleBook: builder.query({
       query: (id) => `/books/${id}`,
-      providesTags: ["Book"],
+      providesTags: ['Book'],
     }),
     addBook: builder.mutation({
       query: (data) => ({
-        url: "/books/add-book",
-        method: "POST",
+        url: '/books/add-book',
+        method: 'POST',
         body: data,
       }),
-      invalidatesTags: ["Books"],
+      invalidatesTags: ['Books'],
     }),
     updateBook: builder.mutation({
       query: ({ data, id }) => ({
         url: `/books/${id}`,
-        method: "PATCH",
+        method: 'PATCH',
         body: data,
       }),
-      invalidatesTags: ["Book"],
+      invalidatesTags: ['Book'],
     }),
     deleteBook: builder.mutation({
       query: ({ id }) => ({
         url: `/books/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
       }),
-      invalidatesTags: ["Books"],
+      invalidatesTags: ['Books'],
     }),
     addReview: builder.mutation({
       query: ({ id, data }) => ({
         url: `/books/review/${id}`,
-        method: "POST",
+        method: 'POST',
         body: {
           review: data.review,
         },
       }),
-      invalidatesTags: ["Review"],
+      invalidatesTags: ['Review'],
     }),
     getReview: builder.query({
       query: (id) => `/books/review/${id}`,
-      providesTags: ["Review"],
+      providesTags: ['Review'],
     }),
     getSearchBooks: builder.query({
       query: (searchTerm) => `/books?searchTerm=${searchTerm}`,

@@ -1,16 +1,17 @@
 import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
-} from "@/redux/features/book/bookApi";
-
+} from "../redux/features/book/bookApi";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { IBooks } from "@/types/interface";
+import { IBooks } from "../types/interface";
 function UpdateBook() {
   const { id } = useParams();
   const navigate = useNavigate();
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { data: book } = useGetSingleBookQuery(id!);
-  const [updateBook, { isError, isSuccess }] = useUpdateBookMutation();
+  const [updateBook] = useUpdateBookMutation();
 
   const {
     register,
@@ -93,7 +94,6 @@ function UpdateBook() {
           </div>
         </form>
       </div>
-      {/* <PreviousBtn /> */}
     </div>
   );
 }

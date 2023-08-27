@@ -1,4 +1,5 @@
-import { useAddToFinishedBooksMutation } from "@/redux/features/user/userApi";
+import { useAddToFinishedBooksMutation } from "../redux/features/user/userApi";
+import React from "react";
 import toast from "react-hot-toast";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
@@ -9,6 +10,7 @@ const AddToFinishedBooks = (id) => {
     try {
       const response = await addToFinishedBooks(id);
       if ("error" in response) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         toast.error((response as any).error.data.errorMessages[0].message);
       } else {
         toast.success(response.data.message);

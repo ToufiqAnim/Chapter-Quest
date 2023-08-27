@@ -1,8 +1,7 @@
-import { useAddReviewMutation } from "@/redux/features/book/bookApi";
+import { useAddReviewMutation } from "../redux/features/book/bookApi";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import { AiOutlineSend } from "react-icons/ai";
-
+import React from "react";
 const AddReview = ({ id }) => {
   const [reviewInput, setReviewInput] = useState("");
   const [addReview, { isLoading }] = useAddReviewMutation();

@@ -11,6 +11,7 @@ const RemoveFromWishList = (id) => {
     try {
       const response = await removeFromWishList(id);
       if ("error" in response) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         toast.error((response as any).error.data.errorMessages[0].message);
       } else {
         toast.success(response.data.message);

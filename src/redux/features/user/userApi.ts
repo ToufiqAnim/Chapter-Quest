@@ -1,62 +1,65 @@
-import { api } from "@/redux/api/apiSlice";
+import api from '../../api/apiSlice';
 
 export const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
     addToWishList: builder.mutation({
       query: ({ id }) => ({
         url: `/users/addToWishList/${id}`,
-        method: "POST",
+        method: 'POST',
       }),
-      invalidatesTags: ["Wishlist"],
+      invalidatesTags: ['Wishlist'],
     }),
-    getReadingList: builder.query({
-      query: () => "/users/readingList",
-      providesTags: ["ReadingList"],
+    addToReadingList: builder.mutation({
+      query: ({ id }) => ({
+        url: `/users/addToReadingList/${id}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Wishlist', 'ReadingList'],
+    }),
+
+    addToFinishedBooks: builder.mutation({
+      query: ({ id }) => ({
+        url: `/users/addToFinishedBook/${id}`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['ReadingList', 'FinishedBooks'],
     }),
     removeFromWishList: builder.mutation({
       query: ({ id }) => ({
         url: `/users/removeFromWishlist/${id}`,
-        method: "POST",
+        method: 'POST',
       }),
-      invalidatesTags: ["Wishlist"],
+      invalidatesTags: ['Wishlist'],
     }),
     removeFromReadingList: builder.mutation({
       query: ({ id }) => ({
         url: `/users/removeFromReadingList/${id}`,
-        method: "POST",
+        method: 'POST',
       }),
-      invalidatesTags: ["ReadingList"],
-    }),
-    getWishlist: builder.query({
-      query: () => "/users/wishlist",
-      providesTags: ["Wishlist"],
-    }),
-
-    addToReadingList: builder.mutation({
-      query: ({ id }) => ({
-        url: `/users/addToReadingList/${id}`,
-        method: "POST",
-      }),
-      invalidatesTags: ["Wishlist", "ReadingList"],
-    }),
-    addToFinishedBooks: builder.mutation({
-      query: ({ id }) => ({
-        url: `/users/addToFinishedBook/${id}`,
-        method: "POST",
-      }),
-      invalidatesTags: ["ReadingList", "FinishedBooks"],
-    }),
-    getFinishedBooks: builder.query({
-      query: () => "/users/finishedBooks",
-      providesTags: ["finishedBooks"],
+      invalidatesTags: ['ReadingList'],
     }),
     removeFromFinishedBooks: builder.mutation({
       query: ({ id }) => ({
         url: `/users/removeFromFinishedBooks/${id}`,
-        method: "POST",
+        method: 'POST',
       }),
-      invalidatesTags: ["FinishedBooks"],
+      invalidatesTags: ['FinishedBooks'],
     }),
+    getWishlist: builder.query({
+      query: () => '/users/wishlist',
+      providesTags: ['Wishlist'],
+    }),
+
+    getReadingList: builder.query({
+      query: () => '/users/readingList',
+      providesTags: ['ReadingList'],
+    }),
+
+    getFinishedBooks: builder.query({
+      query: () => '/users/finishedBooks',
+      providesTags: ['FinishedBooks'],
+    }),
+
     //----
   }),
 });

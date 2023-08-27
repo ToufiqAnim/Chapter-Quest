@@ -1,6 +1,7 @@
-import RemoveFromFinishedBooks from "@/compnents/RemoveFromFinishedBooks";
-import { useGetFinishedBooksQuery } from "@/redux/features/user/userApi";
-import { IBooks } from "@/types/interface";
+import React from "react";
+import RemoveFromFinishedBooks from "../compnents/RemoveFromFinishedBooks";
+import { useGetFinishedBooksQuery } from "../redux/features/user/userApi";
+import { IBooks } from "../types/interface";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
@@ -16,7 +17,8 @@ const FinishedBooks = () => {
   }
 
   if (error) {
-    toast.error(error.data.errorMessages[0].message);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    toast.error((error as any).data.errorMessages[0].message);
   }
 
   if (!data || data.length === 0) {

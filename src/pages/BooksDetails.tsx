@@ -1,15 +1,12 @@
-import {
-  useGetAllBooksQuery,
-  useGetSingleBookQuery,
-} from "@/redux/features/book/bookApi";
-
+import { useGetSingleBookQuery } from "../redux/features/book/bookApi";
+import React from "react";
 import { FiEdit } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
 import DeleteBook from "./DeleteBook";
-import AddToWishlist from "@/compnents/AddToWishlist";
-import AddToReadingList from "@/compnents/AddToReadingList";
-import AddReview from "@/compnents/PostReviews";
-import Reviews from "@/compnents/Reviews";
+import AddToWishlist from "../compnents/AddToWishlist";
+import AddToReadingList from "../compnents/AddToReadingList";
+import AddReview from "../compnents/PostReviews";
+import Reviews from "../compnents/Reviews";
 
 function BooksDetails() {
   const { id } = useParams();

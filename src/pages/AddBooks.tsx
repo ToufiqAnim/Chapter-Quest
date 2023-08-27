@@ -1,18 +1,17 @@
-import { useAddBookMutation } from "@/redux/features/book/bookApi";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useAddBookMutation } from "../redux/features/book/bookApi";
+
 import { useForm } from "react-hook-form";
 
-import image from "../assets/harry Potter 4.jpg";
-import { IBooks, MyResponse } from "@/types/interface";
+import { IBooks } from "../types/interface";
 import toast from "react-hot-toast";
 
 const AddBooks = () => {
-  const navigate = useNavigate();
-  const [addBook, { isLoading }] = useAddBookMutation();
+  const [addBook] = useAddBookMutation();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+
     reset,
   } = useForm<IBooks>();
   const onSubmit = async (data: IBooks) => {
@@ -20,9 +19,9 @@ const AddBooks = () => {
       const response = await addBook(data);
 
       if ("error" in response) {
-        toast.error((response as any).error.data.message);
+        toast.error(response.error.data.message);
       } else if ("data" in response) {
-        toast.success((response as any).data.message);
+        toast.success(response.data.message);
       }
     } catch (error) {
       toast.error("An unexpected error occurred. Please try again later.");
@@ -34,7 +33,11 @@ const AddBooks = () => {
     <div className="hero min-h-screen bg-base-200">
       <div className="flex flex-col md:flex-row items-center xl:w-4/6 mx-auto ">
         <div className="md:hidden lg:block w-full md:w-1/2 xl:w-2/3 ">
-          <img src={image} alt="" className="w-full h-full object-cover" />
+          <img
+            src="https://i.ibb.co/7C58r24/harry-Potter-4.webp"
+            alt=""
+            className="w-full h-full object-cover"
+          />
         </div>
         <div
           className=" w-full md:max-w-md lg:max-w-full md:mx-auto  md:w-1/2  px-6 lg:px-16 xl:px-12

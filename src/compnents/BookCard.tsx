@@ -1,13 +1,8 @@
 import React from "react";
 import { IBooks } from "../types/interface";
-import { Link, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { MdDescription } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 export function BookCard(book: IBooks) {
-  const { pathname } = useLocation();
-  const dispatch = useDispatch();
-
   return (
     <div>
       <Link to={`/books-details/${book._id}`}>

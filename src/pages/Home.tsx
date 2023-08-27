@@ -1,9 +1,8 @@
-import image from "../assets/harry Potter 4.jpg";
+import React from "react";
 import Books from "./Books";
 const Home = () => {
   return (
     <>
-      {/* header */}
       <main>
         <div className="flex justify-around items-center contaier mx-auto">
           <div>
@@ -22,7 +21,7 @@ const Home = () => {
           </div>
           <div className=" text-center">
             <img
-              src={image}
+              src="https://i.ibb.co/7C58r24/harry-Potter-4.webp"
               alt=""
               className="w-[600px] top-0 left-0   rounded-3xl "
             />

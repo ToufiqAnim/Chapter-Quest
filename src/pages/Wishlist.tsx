@@ -1,9 +1,10 @@
-import AddToReadingList from "@/compnents/AddToReadingList";
-import RemoveFromWishList from "@/compnents/RemoveFromWishList";
-import { useGetWishlistQuery } from "@/redux/features/user/userApi";
-import { IBooks } from "@/types/interface";
-import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import React from 'react';
+import AddToReadingList from '../compnents/AddToReadingList';
+import RemoveFromWishList from '../compnents/RemoveFromWishList';
+import { useGetWishlistQuery } from '../redux/features/user/userApi';
+import { IBooks } from '../types/interface';
+import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const Wishlist = () => {
   const { data, error, isLoading } = useGetWishlistQuery(undefined);
@@ -17,7 +18,7 @@ const Wishlist = () => {
   }
 
   if (error) {
-    toast.error(error.data.errorMessages[0].message);
+    toast.error((error as any).data.errorMessages[0].message);
   }
 
   if (!data || data.length === 0) {

@@ -1,11 +1,8 @@
-import { useDeleteBookMutation } from "@/redux/features/book/bookApi";
+import React from "react";
+import { useDeleteBookMutation } from "../redux/features/book/bookApi";
 import toast from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-
-/* interface DeleteBookProps {
-  id: string;
-} */
 
 const DeleteBook = (id) => {
   const navigate = useNavigate();

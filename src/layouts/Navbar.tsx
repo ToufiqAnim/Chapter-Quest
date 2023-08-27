@@ -1,28 +1,20 @@
-import {
-  BsBook,
-  BsArrowLeftCircle,
-  BsFillJournalBookmarkFill,
-} from "react-icons/bs";
-import { BsSearch } from "react-icons/bs";
-
-import { MdOutlineAccountCircle } from "react-icons/md";
+import React from "react";
+import { BsBook } from "react-icons/bs";
 
 import {
   AiOutlineBook,
   AiOutlineCheckCircle,
-  AiOutlineHome,
   AiOutlineRead,
   AiOutlineStar,
 } from "react-icons/ai";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
-import { useAppDispatch } from "@/redux/hooks";
-import { logout } from "@/redux/features/auth/authSlice";
+import { useAppDispatch } from "../redux/hooks";
+import { logout } from "../redux/features/auth/authSlice";
 import { useState } from "react";
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [isSearchOpen, setSearchOpen] = useState(false);
-  const [isMenuOpen, setMenuOpen] = useState(false);
+
   const dispatch = useAppDispatch();
   const storedAuthData = localStorage.getItem("auth");
   const navigate = useNavigate();
@@ -32,10 +24,7 @@ const Navbar = () => {
     e.preventDefault();
     navigate(`/search/${encodeURIComponent(searchTerm)}`);
   };
-  const handleSearch = () => {
-    setSearchOpen(!isSearchOpen);
-    setMenuOpen(false);
-  };
+
   const handleLogout = () => {
     localStorage.removeItem("auth");
     dispatch(logout());

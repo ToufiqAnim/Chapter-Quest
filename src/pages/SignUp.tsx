@@ -1,7 +1,6 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-
-import image from "../assets/harry Potter 4.jpg";
-import SignUpForm from "@/compnents/SignUpFrom";
+import { Link, useLocation } from "react-router-dom";
+import React from "react";
+import SignUpForm from "../compnents/SignUpFrom";
 
 function SignUp() {
   const location = useLocation();
@@ -12,7 +11,11 @@ function SignUp() {
     <div className="m-20">
       <div className="flex flex-col md:flex-row items-center xl:w-4/6 mx-auto ">
         <div className="md:hidden lg:block w-full md:w-1/2 xl:w-2/3 ">
-          <img src={image} alt="" className="w-full h-full object-cover" />
+          <img
+            src="https://i.ibb.co/7C58r24/harry-Potter-4.webp"
+            alt=""
+            className="w-full h-full object-cover"
+          />
         </div>
 
         <div
@@ -21,7 +24,7 @@ function SignUp() {
         >
           <div className="w-full h-100 mb-10">
             <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">
-              Log in to your account
+              Sign Up
             </h1>
 
             <SignUpForm />

@@ -1,8 +1,7 @@
-import { useAddToWishListMutation } from "@/redux/features/user/userApi";
+import { useAddToWishListMutation } from "../redux/features/user/userApi";
 import toast from "react-hot-toast";
-
-import { AiOutlineHeart, AiOutlineStar } from "react-icons/ai";
-import { useParams } from "react-router-dom";
+import React from "react";
+import { AiOutlineStar } from "react-icons/ai";
 
 const AddToWishList = (id) => {
   const [addToWishList, { isLoading }] = useAddToWishListMutation();

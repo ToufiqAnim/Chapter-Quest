@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { useRemoveFromFinishedBooksMutation } from "../redux/features/user/userApi";
-
+import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 
 const RemoveFromFinishedBooks = (id) => {
@@ -11,6 +11,7 @@ const RemoveFromFinishedBooks = (id) => {
     try {
       const response = await removeFromFinishedBooks(id);
       if ("error" in response) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         toast.error((response as any).error.data.errorMessages[0].message);
       } else {
         toast.success(response.data.message);

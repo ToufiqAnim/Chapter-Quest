@@ -1,10 +1,10 @@
-import { useGetReviewQuery } from "@/redux/features/book/bookApi";
-import { IReview } from "@/types/interface";
-import { AiOutlineUser } from "react-icons/ai";
-
+import { useGetReviewQuery } from '../redux/features/book/bookApi';
+import { IReview } from '../types/interface';
+import { AiOutlineUser } from 'react-icons/ai';
+import React from 'react';
 const Reviews = ({ id }) => {
   const { data } = useGetReviewQuery(id);
-  console.log(data);
+
   if (data?.data?.length) {
     return (
       <>
@@ -17,10 +17,10 @@ const Reviews = ({ id }) => {
               <AiOutlineUser size={25} />
             </div>
             <div>
-              <div className="text-sm font-semibold">
+              {/*   <div className="text-sm font-semibold">
                 {review.reviewer.name}
-              </div>
-              <h4 className="text-gray-500">{review.review}</h4>
+              </div> */}
+              <h4 className="text-black">{review.review}</h4>
             </div>
           </div>
         ))}
@@ -29,7 +29,7 @@ const Reviews = ({ id }) => {
   } else {
     return (
       <div className="flex items-center">
-        <h4>No Data Found...</h4>
+        <h4>No Reviews yet...</h4>
       </div>
     );
   }
