@@ -1,12 +1,12 @@
-import React from "react";
-import Books from "./Books";
+import React from 'react';
+import Books from './Books';
 const Home = () => {
   return (
     <>
       <main>
-        <div className="flex justify-around items-center contaier mx-auto">
+        <div className=" 2xl:flex  xs:flex-col justify-around items-center contaier mx-auto ">
           <div>
-            <h1 className="text-5xl font-lobstar ">
+            <h1 className="max-md:text-3xl  lg:text-5xl font-lobstar ">
               Uncover Literary Treasures at <br /> Chapter Quest.
             </h1>
             <p className="mt-4 max-w-2xl font-lobstar font-thin">
@@ -15,7 +15,7 @@ const Home = () => {
               and find your next great read. Embark on a literary adventure
               today and unlock the transformative power of books.
             </p>
-            <button className="mt-3 bg-slate-800 text-white px-6 py-2 rounded">
+            <button className="mt-3 mb-3 bg-slate-800 text-white px-6 py-2 rounded">
               Start Reading
             </button>
           </div>
@@ -23,7 +23,7 @@ const Home = () => {
             <img
               src="https://i.ibb.co/7C58r24/harry-Potter-4.webp"
               alt=""
-              className="w-[600px] top-0 left-0   rounded-3xl "
+              className="w-[600px] top-0 left-0 rounded-3xl "
             />
 
             <h1 className="text-xl font-lobstar ">The Chamber Of Secrets</h1>

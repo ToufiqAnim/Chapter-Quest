@@ -1,16 +1,18 @@
-import React from "react";
-import BookCard from "../compnents/BookCard";
-import { useGetSearchBooksQuery } from "../redux/features/book/bookApi";
-import { IBooks } from "../types/interface";
+import React from 'react';
+import BookCard from '../compnents/BookCard';
+import { useGetSearchBooksQuery } from '../redux/features/book/bookApi';
+import { IBooks } from '../types/interface';
 
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 const SearchResult = () => {
   const { searchTerm } = useParams();
 
   const { data, isLoading } = useGetSearchBooksQuery(searchTerm);
+
   const books = data?.data;
-  if (data?.length) {
+
+  if (books?.length) {
     return (
       <>
         {isLoading ? (
@@ -19,7 +21,7 @@ const SearchResult = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-5 py-8">
-            {books.map((book: IBooks) => (
+            {books?.map((book: IBooks) => (
               <BookCard key={book._id} {...book} />
             ))}
           </div>
