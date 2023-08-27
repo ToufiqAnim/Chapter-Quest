@@ -1,22 +1,22 @@
-import React from "react";
-import { BsBook } from "react-icons/bs";
+import React from 'react';
+import { BsBook } from 'react-icons/bs';
 
 import {
   AiOutlineBook,
   AiOutlineCheckCircle,
   AiOutlineRead,
   AiOutlineStar,
-} from "react-icons/ai";
-import { NavLink, useNavigate } from "react-router-dom";
+} from 'react-icons/ai';
+import { NavLink, useNavigate } from 'react-router-dom';
 
-import { useAppDispatch } from "../redux/hooks";
-import { logout } from "../redux/features/auth/authSlice";
-import { useState } from "react";
+import { useAppDispatch } from '../redux/hooks';
+import { logout } from '../redux/features/auth/authSlice';
+import { useState } from 'react';
 const Navbar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const dispatch = useAppDispatch();
-  const storedAuthData = localStorage.getItem("auth");
+  const storedAuthData = localStorage.getItem('auth');
   const navigate = useNavigate();
   const token = storedAuthData ? JSON.parse(storedAuthData).token : null;
 
@@ -26,9 +26,9 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("auth");
+    localStorage.removeItem('auth');
     dispatch(logout());
-    navigate("/");
+    navigate('/');
   };
   return (
     <nav className=" top-0 shadow-md px-8 py-8 flex justify-evenly font-lobstar">
@@ -41,11 +41,11 @@ const Navbar = () => {
           <NavLink to="/books">
             <li
               className={
-                "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   "
+                'flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   '
               }
             >
               <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
-                <AiOutlineBook className={"w-6 h-6"} />
+                <AiOutlineBook className={'w-6 h-6'} />
                 <p>Books</p>
               </div>
             </li>
@@ -55,11 +55,11 @@ const Navbar = () => {
               <NavLink to="books/add-book">
                 <li
                   className={
-                    "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   "
+                    'flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   '
                   }
                 >
                   <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
-                    <AiOutlineBook className={"w-6 h-6"} />
+                    <AiOutlineBook className={'w-6 h-6'} />
                     <p>Add Books</p>
                   </div>
                 </li>
@@ -67,11 +67,11 @@ const Navbar = () => {
               <NavLink to="/wishlist">
                 <li
                   className={
-                    "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   "
+                    'flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   '
                   }
                 >
                   <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
-                    <AiOutlineStar className={"w-6 h-6"} />
+                    <AiOutlineStar className={'w-6 h-6'} />
                     <p>Wishlist</p>
                   </div>
                 </li>
@@ -79,11 +79,11 @@ const Navbar = () => {
               <NavLink to="/reading-list">
                 <li
                   className={
-                    "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   "
+                    'flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   '
                   }
                 >
                   <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
-                    <AiOutlineRead className={"w-6 h-6"} />
+                    <AiOutlineRead className={'w-6 h-6'} />
                     <p>Reading List</p>
                   </div>
                 </li>
@@ -91,13 +91,13 @@ const Navbar = () => {
               <NavLink to="finished-books">
                 <li
                   className={
-                    "flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   "
+                    'flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   '
                   }
                 >
-                  <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                  {/*  <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
                     <AiOutlineCheckCircle className={"w-6 h-6"} />
                     <p>Finished Books</p>
-                  </div>
+                  </div> */}
                 </li>
               </NavLink>
             </>

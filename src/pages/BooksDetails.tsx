@@ -1,17 +1,17 @@
-import { useGetSingleBookQuery } from "../redux/features/book/bookApi";
-import React from "react";
-import { FiEdit } from "react-icons/fi";
-import { Link, useParams } from "react-router-dom";
-import DeleteBook from "./DeleteBook";
-import AddToWishlist from "../compnents/AddToWishlist";
-import AddToReadingList from "../compnents/AddToReadingList";
-import AddReview from "../compnents/PostReviews";
-import Reviews from "../compnents/Reviews";
+import { useGetSingleBookQuery } from '../redux/features/book/bookApi';
+import React from 'react';
+import { FiEdit } from 'react-icons/fi';
+import { Link, useParams } from 'react-router-dom';
+import DeleteBook from './DeleteBook';
+import AddToWishlist from '../compnents/AddToWishlist';
+import AddToReadingList from '../compnents/AddToReadingList';
+import AddReview from '../compnents/PostReviews';
+import Reviews from '../compnents/Reviews';
 
 function BooksDetails() {
   const { id } = useParams();
 
-  const storedAuthData = localStorage.getItem("auth");
+  const storedAuthData = localStorage.getItem('auth');
   const authData = storedAuthData ? JSON.parse(storedAuthData) : null;
   const user = authData ? authData.user : null;
   const { data, isLoading } = useGetSingleBookQuery(id);
@@ -56,7 +56,7 @@ function BooksDetails() {
                         <AddToWishlist id={book?._id} />
                       </div>
 
-                      <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                      <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center ">
                         <AddToReadingList id={book?._id} />
                       </div>
                     </div>
