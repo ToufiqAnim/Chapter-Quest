@@ -1,17 +1,17 @@
-import React from "react";
-import { IBooks } from "../types/interface";
-import BookCard from "../compnents/BookCard";
-import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useGetAllBooksQuery } from "../redux/features/book/bookApi";
+import React from 'react';
+import { IBooks } from '../types/interface';
+import BookCard from '../compnents/BookCard';
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useGetAllBooksQuery } from '../redux/features/book/bookApi';
 
 const Books = () => {
   const { pathname } = useLocation();
   const { data, isLoading } = useGetAllBooksQuery(undefined);
   const Books = data?.data;
 
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const [selectedPublicationDate, setSelectedPublicationDate] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState('');
+  const [selectedPublicationDate, setSelectedPublicationDate] = useState('');
   const [filteredGenres, setFilteredGenres] = useState<IBooks[]>(Books || []);
   const [filteredPublicationDates, setFilteredPublicationDates] = useState<
     string[]
@@ -25,7 +25,7 @@ const Books = () => {
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedGenre(event.target.value);
-    setSelectedPublicationDate("");
+    setSelectedPublicationDate('');
   };
 
   const handlePublicationDateChange = (
@@ -60,7 +60,7 @@ const Books = () => {
     : filteredGenres;
   return (
     <>
-      {pathname.includes("/books") && (
+      {pathname.includes('/books') && (
         <div className=" mx-auto flex justify-end items-center space-x-3 py-8">
           <select
             className="p-3 hover:shadow-xl  duration-300  rounded"
@@ -93,8 +93,8 @@ const Books = () => {
           <button className="animate-spin rounded-full h-24 w-24 border-t-2 border-b-2 border-gray-900"></button>
         </div>
       ) : (
-        <div className="py-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
-          {!pathname.includes("/books")
+        <div className="py-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1  xl:grid-cols-2 2xl:grid-cols-3 gap-8">
+          {!pathname.includes('/books')
             ? data?.data
                 .slice(0, 10)
                 .map((book: IBooks) => <BookCard {...book} key={book._id} />)

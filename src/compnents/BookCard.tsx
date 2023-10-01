@@ -6,8 +6,8 @@ export function BookCard(book: IBooks) {
   return (
     <div>
       <Link to={`/books-details/${book._id}`}>
-        <div className="shadow-xl shadow-gray-400 w-full lg:max-w-full lg:flex items-center h-72 max-md:h-[500px]">
-          <div className="h-48 lg:h-72 lg:w-48 flex-none bg-cover text-center overflow-hidden ">
+        <div className="shadow-xl shadow-gray-400 w-full lg:max-w-full lg:flex md:flex items-center h-72 max-md:h-[500px]">
+          <div className=" lg:h-72 md:w-48 flex-none bg-cover text-center overflow-hidden ">
             <img src={book.image} alt="" className="h-72 p-4" />
           </div>
           <div className=" p-4 flex flex-col justify-between ">
