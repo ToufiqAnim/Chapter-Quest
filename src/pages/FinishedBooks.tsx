@@ -1,9 +1,9 @@
-import React from "react";
-import RemoveFromFinishedBooks from "../compnents/RemoveFromFinishedBooks";
-import { useGetFinishedBooksQuery } from "../redux/features/user/userApi";
-import { IBooks } from "../types/interface";
-import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import React from 'react';
+import RemoveFromFinishedBooks from '../compnents/RemoveFromFinishedBooks';
+import { useGetFinishedBooksQuery } from '../redux/features/user/userApi';
+import { IBooks } from '../types/interface';
+import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const FinishedBooks = () => {
   const { data, error, isLoading } = useGetFinishedBooksQuery(undefined);

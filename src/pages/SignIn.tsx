@@ -1,12 +1,10 @@
 import SignInForm from '../compnents/SignInForm';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import NavBar from '../layouts/responsiveNavabr';
 
 function SignIn() {
   return (
     <>
-      <NavBar />
       <div className="m-20">
         <div className="flex flex-col md:flex-row items-center xl:w-4/6 mx-auto ">
           <div className="md:hidden lg:block w-full md:w-1/2 xl:w-2/3 ">

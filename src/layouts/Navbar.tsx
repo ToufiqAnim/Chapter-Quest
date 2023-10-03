@@ -94,10 +94,10 @@ const Navbar = () => {
                     'flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-black text-xl items-center   '
                   }
                 >
-                  {/*  <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
-                    <AiOutlineCheckCircle className={"w-6 h-6"} />
+                  <div className="hover:bg-[#e36065] duration-300 rounded hover:p-2 hover:text-white flex gap-1 items-center">
+                    <AiOutlineCheckCircle className={'w-6 h-6'} />
                     <p>Finished Books</p>
-                  </div> */}
+                  </div>
                 </li>
               </NavLink>
             </>

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useSigninMutation } from "../redux/features/auth/authApi";
-import React from "react";
-import { setAuth } from "../redux/features/auth/authSlice";
-import { useAppDispatch } from "../redux/hooks";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useSigninMutation } from '../redux/features/auth/authApi';
+import React from 'react';
+import { setAuth } from '../redux/features/auth/authSlice';
+import { useAppDispatch } from '../redux/hooks';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 interface SignInFormInputs {
   email: string;
@@ -27,12 +27,13 @@ export default function SignInForm() {
     try {
       const response = await signin(data);
       const loginData = await (response as any).data.data;
-      if ("data" in response) {
+      if ('data' in response) {
         localStorage.clear();
         dispatch(setAuth(loginData));
 
         toast.success(response.data.message);
-        navigate("/");
+        window.location.reload();
+        navigate('/');
       }
     } catch (error) {
       const response = await signin(data);
@@ -50,7 +51,7 @@ export default function SignInForm() {
           type="text"
           placeholder="Enter Email Address"
           className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-          {...register("email", { required: "Email is required" })}
+          {...register('email', { required: 'Email is required' })}
         />
         {errors.email && (
           <p className="form_error my-2 text-red-600">{errors.email.message}</p>
@@ -62,7 +63,7 @@ export default function SignInForm() {
           type="password"
           placeholder="Enter Password"
           className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-gray-400"
-          {...register("password", { required: "Password is required" })}
+          {...register('password', { required: 'Password is required' })}
         />
         {errors.password && (
           <p className="form_error my-2 text-red-600">

@@ -11,7 +11,7 @@ const addAuthTokenToHeaders = (headers: Headers) => {
 const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://chapter-quest-server.vercel.app/api/v1',
+    baseUrl: 'http://localhost:5000/api/v1',
     prepareHeaders: (headers) => {
       const newHeaders = new Headers(headers);
       addAuthTokenToHeaders(newHeaders);
