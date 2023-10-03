@@ -1,12 +1,14 @@
-import React from "react";
-import { useAddBookMutation } from "../redux/features/book/bookApi";
+import React from 'react';
+import { useAddBookMutation } from '../redux/features/book/bookApi';
 
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 
-import { IBooks } from "../types/interface";
-import toast from "react-hot-toast";
+import { IBooks } from '../types/interface';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddBooks = () => {
+  const navigate = useNavigate();
   const [addBook] = useAddBookMutation();
   const {
     register,
@@ -18,13 +20,14 @@ const AddBooks = () => {
     try {
       const response = await addBook(data);
 
-      if ("error" in response) {
-        toast.error(response.error.data.message);
-      } else if ("data" in response) {
+      if ('error' in response) {
+        toast.error((response as any).error.data.message);
+      } else if ('data' in response) {
         toast.success(response.data.message);
+        navigate('/books');
       }
     } catch (error) {
-      toast.error("An unexpected error occurred. Please try again later.");
+      toast.error('An unexpected error occurred. Please try again later.');
     }
 
     reset();
@@ -52,7 +55,7 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter Book Title"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("title", { required: "title is required" })}
+                  {...register('title', { required: 'title is required' })}
                 />
               </div>
               <div className="form-control w-full max-w-xs">
@@ -61,8 +64,8 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter Author Name"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("author", {
-                    required: "author name is required",
+                  {...register('author', {
+                    required: 'author name is required',
                   })}
                 />
               </div>
@@ -72,8 +75,8 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter Image Url"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("image", {
-                    required: "author name is required",
+                  {...register('image', {
+                    required: 'author name is required',
                   })}
                 />
               </div>
@@ -83,8 +86,8 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter Book Description"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("description", {
-                    required: "author name is required",
+                  {...register('description', {
+                    required: 'author name is required',
                   })}
                 />
               </div>
@@ -94,8 +97,8 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter Book Genre"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("genre", {
-                    required: "genre required",
+                  {...register('genre', {
+                    required: 'genre required',
                   })}
                 />
               </div>
@@ -107,8 +110,8 @@ const AddBooks = () => {
                   type="text"
                   placeholder="Enter  Publication Date"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("publicationDate", {
-                    required: "Publication Date",
+                  {...register('publicationDate', {
+                    required: 'Publication Date',
                   })}
                 />
               </div>

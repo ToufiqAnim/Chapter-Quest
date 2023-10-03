@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
-} from "../redux/features/book/bookApi";
-import { IBooks } from "../types/interface";
+} from '../redux/features/book/bookApi';
+import { IBooks } from '../types/interface';
 
-import toast from "react-hot-toast";
-import { useNavigate, useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 const EditBook = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -26,15 +26,15 @@ const EditBook = () => {
   const onSubmit = async (data: IBooks) => {
     try {
       const response = await updateBook({ id, data });
-      if ("error" in response) {
+      if ('error' in response) {
         toast.error((response as any).error.error);
       } else {
         toast.success(response.data.message);
         navigate(`/books-details/${id}`);
       }
     } catch (error) {
-      console.error("Unexpected error occurred:", error);
-      toast.error("An unexpected error occurred. Please try again later.");
+      console.error('Unexpected error occurred:', error);
+      toast.error('An unexpected error occurred. Please try again later.');
     }
     reset();
   };
@@ -62,7 +62,7 @@ const EditBook = () => {
                   type="text"
                   placeholder="Enter Book Title"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("title")}
+                  {...register('title')}
                   defaultValue={book?.title}
                 />
               </div>
@@ -72,7 +72,8 @@ const EditBook = () => {
                   type="text"
                   placeholder="Enter Author Name"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("author")}
+                  {...register('author')}
+                  defaultValue={book?.author}
                 />
               </div>
               <div className="form-control w-full max-w-xs">
@@ -81,7 +82,7 @@ const EditBook = () => {
                   type="text"
                   placeholder="Enter Image Url"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("image")}
+                  {...register('image')}
                 />
               </div>
               <div className="form-control w-full max-w-xs">
@@ -90,7 +91,8 @@ const EditBook = () => {
                   type="text"
                   placeholder="Enter Book Description"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("description")}
+                  {...register('description')}
+                  defaultValue={book?.description}
                 />
               </div>
               <div className="form-control w-full max-w-xs">
@@ -99,7 +101,8 @@ const EditBook = () => {
                   type="text"
                   placeholder="Enter Book Genre"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("genre")}
+                  {...register('genre')}
+                  defaultValue={book?.genre}
                 />
               </div>
               <div className="form-control w-full max-w-xs">
@@ -110,7 +113,8 @@ const EditBook = () => {
                   type="text"
                   placeholder="Enter  Publication Date"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none border-1 border-gray-400"
-                  {...register("publicationDate")}
+                  {...register('publicationDate')}
+                  defaultValue={book?.publicationDate}
                 />
               </div>
 
