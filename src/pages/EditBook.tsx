@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import {
   useGetSingleBookQuery,
@@ -27,7 +28,8 @@ const EditBook = () => {
     try {
       const response = await updateBook({ id, data });
       if ('error' in response) {
-        toast.error((response as any).error.error);
+        //@ts-ignore
+        toast.error(response.error.error);
       } else {
         toast.success(response.data.message);
         navigate(`/books-details/${id}`);

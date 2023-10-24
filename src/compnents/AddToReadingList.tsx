@@ -1,7 +1,8 @@
-import toast from "react-hot-toast";
-import { useAddToReadingListMutation } from "../redux/features/user/userApi";
-import React from "react";
-import { BiBookReader } from "react-icons/bi";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import toast from 'react-hot-toast';
+import { useAddToReadingListMutation } from '../redux/features/user/userApi';
+import React from 'react';
+import { BiBookReader } from 'react-icons/bi';
 
 const AddToReadingList = (id) => {
   const [addToReadingList, { isLoading }] = useAddToReadingListMutation();
@@ -9,14 +10,15 @@ const AddToReadingList = (id) => {
   const handleAddToReadingList = async () => {
     try {
       const response = await addToReadingList(id);
-      if ("error" in response) {
-        toast.error((response as any).error.data.errorMessages[0].message);
+      if ('error' in response) {
+        //@ts-ignore
+        toast.error(response.error.data.errorMessages[0].message);
       } else {
         toast.success(response.data.message);
       }
     } catch (error) {
-      console.error("Unexpected error occurred:", error);
-      toast.error("An unexpected error occurred. Please try again later.");
+      console.error('Unexpected error occurred:', error);
+      toast.error('An unexpected error occurred. Please try again later.');
     }
   };
   return (

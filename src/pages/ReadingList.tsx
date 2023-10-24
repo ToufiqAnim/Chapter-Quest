@@ -3,11 +3,11 @@ import AddToFinishedBooks from '../compnents/AddToFinishedBooks';
 import RemoveFromReadingList from '../compnents/RemoveFromReadingList';
 import { useGetReadingListQuery } from '../redux/features/user/userApi';
 import { IBooks } from '../types/interface';
-import toast from 'react-hot-toast';
+
 import { Link } from 'react-router-dom';
 
 const ReadingList = () => {
-  const { data, error, isLoading } = useGetReadingListQuery(undefined);
+  const { data, isLoading } = useGetReadingListQuery(undefined);
 
   if (isLoading) {
     return (

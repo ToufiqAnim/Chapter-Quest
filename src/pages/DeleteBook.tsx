@@ -1,28 +1,30 @@
-import React from "react";
-import { useDeleteBookMutation } from "../redux/features/book/bookApi";
-import toast from "react-hot-toast";
-import { AiOutlineDelete } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import React from 'react';
+import { useDeleteBookMutation } from '../redux/features/book/bookApi';
+import toast from 'react-hot-toast';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 const DeleteBook = (id) => {
   const navigate = useNavigate();
   const [deleteBook, { isLoading }] = useDeleteBookMutation();
   const handleDelete = async () => {
     const deleteConfirm = window.confirm(
-      "Are You Sure You Want TO Delete This Book?"
+      'Are You Sure You Want TO Delete This Book?'
     );
 
     if (deleteConfirm) {
       try {
         const response = await deleteBook(id);
-        if ("error" in response) {
-          toast.error((response as any).error.data.errorMessages[0].message);
+        if ('error' in response) {
+          //@ts-ignore
+          toast.error(response.error.data.errorMessages[0].message);
         } else {
           toast.success(response.data.message);
-          navigate("/books");
+          navigate('/books');
         }
       } catch (error) {
-        toast.error("An unexpected error occurred. Please try again later.");
+        toast.error('An unexpected error occurred. Please try again later.');
       }
     }
     const response = await deleteBook(id);

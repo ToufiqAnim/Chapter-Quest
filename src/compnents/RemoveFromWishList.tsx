@@ -1,8 +1,9 @@
-import { useRemoveFromWishListMutation } from "../redux/features/user/userApi";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { useRemoveFromWishListMutation } from '../redux/features/user/userApi';
 
-import React from "react";
-import toast from "react-hot-toast";
-import { AiOutlineDelete } from "react-icons/ai";
+import React from 'react';
+import toast from 'react-hot-toast';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 const RemoveFromWishList = (id) => {
   const [removeFromWishList, { isLoading }] = useRemoveFromWishListMutation();
@@ -10,15 +11,15 @@ const RemoveFromWishList = (id) => {
   const handleRemoveFromWishList = async () => {
     try {
       const response = await removeFromWishList(id);
-      if ("error" in response) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        toast.error((response as any).error.data.errorMessages[0].message);
+      if ('error' in response) {
+        //@ts-ignore
+        toast.error(response.error.data.errorMessages[0].message);
       } else {
         toast.success(response.data.message);
       }
     } catch (error) {
-      console.error("Unexpected error occurred:", error);
-      toast.error("An unexpected error occurred. Please try again later.");
+      console.error('Unexpected error occurred:', error);
+      toast.error('An unexpected error occurred. Please try again later.');
     }
   };
   return (

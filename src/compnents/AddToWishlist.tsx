@@ -1,7 +1,8 @@
-import { useAddToWishListMutation } from "../redux/features/user/userApi";
-import toast from "react-hot-toast";
-import React from "react";
-import { AiOutlineStar } from "react-icons/ai";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { useAddToWishListMutation } from '../redux/features/user/userApi';
+import toast from 'react-hot-toast';
+import React from 'react';
+import { AiOutlineStar } from 'react-icons/ai';
 
 const AddToWishList = (id) => {
   const [addToWishList, { isLoading }] = useAddToWishListMutation();
@@ -9,14 +10,15 @@ const AddToWishList = (id) => {
   const handleAddToWishlist = async () => {
     try {
       const response = await addToWishList(id);
-      if ("error" in response) {
-        toast.error((response as any).error.data.errorMessages[0].message);
+      if ('error' in response) {
+        //@ts-ignore
+        toast.error(response.error.data.errorMessages[0].message);
       } else {
         toast.success(response.data.message);
       }
     } catch (error) {
-      console.error("Unexpected error occurred:", error);
-      toast.error("An unexpected error occurred. Please try again later.");
+      console.error('Unexpected error occurred:', error);
+      toast.error('An unexpected error occurred. Please try again later.');
     }
   };
   return (

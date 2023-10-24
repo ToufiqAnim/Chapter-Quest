@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import AddToReadingList from '../compnents/AddToReadingList';
 import RemoveFromWishList from '../compnents/RemoveFromWishList';
@@ -18,7 +19,8 @@ const Wishlist = () => {
   }
 
   if (error) {
-    toast.error((error as any).data.errorMessages[0].message);
+    //@ts-ignore
+    toast.error(error.data.errorMessages[0].message);
   }
 
   if (!data || data.length === 0) {

@@ -1,7 +1,8 @@
-import { useRemoveFromReadingListMutation } from "../redux/features/user/userApi";
-import React from "react";
-import toast from "react-hot-toast";
-import { AiOutlineDelete } from "react-icons/ai";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { useRemoveFromReadingListMutation } from '../redux/features/user/userApi';
+import React from 'react';
+import toast from 'react-hot-toast';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 const RemoveFromReadingList = (id) => {
   const [removeFromReadingList, { isLoading }] =
@@ -10,14 +11,15 @@ const RemoveFromReadingList = (id) => {
   const handleRemoveFromReadingList = async () => {
     try {
       const response = await removeFromReadingList(id);
-      if ("error" in response) {
-        toast.error((response as any).error.data.errorMessages[0].message);
+      if ('error' in response) {
+        //@ts-ignore
+        toast.error(response.error.data.errorMessages[0].message);
       } else {
         toast.success(response.data.message);
       }
     } catch (error) {
-      console.error("Unexpected error occurred:", error);
-      toast.error("An unexpected error occurred. Please try again later.");
+      console.error('Unexpected error occurred:', error);
+      toast.error('An unexpected error occurred. Please try again later.');
     }
   };
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSigninMutation } from '../redux/features/auth/authApi';
 import React from 'react';
@@ -26,7 +27,8 @@ export default function SignInForm() {
   const onSubmit = async (data: SignInFormInputs) => {
     try {
       const response = await signin(data);
-      const loginData = await (response as any).data.data;
+      //@ts-ignore
+      const loginData = await response.data.data;
       if ('data' in response) {
         localStorage.clear();
         dispatch(setAuth(loginData));
@@ -37,7 +39,8 @@ export default function SignInForm() {
       }
     } catch (error) {
       const response = await signin(data);
-      toast.error((response as any).error.data.message);
+      //@ts-ignore
+      toast.error(response.error.data.message);
     }
 
     reset();

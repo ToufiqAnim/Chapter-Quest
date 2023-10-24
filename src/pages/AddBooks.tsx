@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import { useAddBookMutation } from '../redux/features/book/bookApi';
 
@@ -21,7 +22,8 @@ const AddBooks = () => {
       const response = await addBook(data);
 
       if ('error' in response) {
-        toast.error((response as any).error.data.message);
+        //@ts-ignore
+        toast.error(response.error.data.message);
       } else if ('data' in response) {
         toast.success(response.data.message);
         navigate('/books');

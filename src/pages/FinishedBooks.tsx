@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import RemoveFromFinishedBooks from '../compnents/RemoveFromFinishedBooks';
 import { useGetFinishedBooksQuery } from '../redux/features/user/userApi';
@@ -17,8 +18,8 @@ const FinishedBooks = () => {
   }
 
   if (error) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    toast.error((error as any).data.errorMessages[0].message);
+    //@ts-ignore
+    toast.error(error.data.errorMessages[0].message);
   }
 
   if (!data || data.length === 0) {

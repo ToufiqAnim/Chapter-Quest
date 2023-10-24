@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import React from 'react';
@@ -15,10 +16,13 @@ const AddReview = ({ id }) => {
         },
       };
       const response = await addReview(options);
-      if ((response as any).error) {
-        toast.error((response as any).error.data.errorMessages[0].message);
+      //@ts-ignore
+      if (response.error) {
+        //@ts-ignore
+        toast.error(response.error.data.errorMessages[0].message);
       } else {
-        toast.success((response as any).data.message);
+        //@ts-ignore
+        toast.success(response.data.message);
         setReviewInput('');
       }
     } catch (error) {
